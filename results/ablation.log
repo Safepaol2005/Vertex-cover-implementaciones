@@ -1,0 +1,110 @@
+er200_c1_s0 HyVC completo 56 0.00 True 0
+er200_c1_s0 sin reducciones 56 0.00 True 0
+er200_c1_s0 sin DP 56 0.00 True 0
+er200_c1_s0 sin division 56 0.00 True 0
+er200_c1_s0 sin Monte Carlo 56 0.00 True 0
+er200_c1_s1 HyVC completo 52 0.00 True 0
+er200_c1_s1 sin reducciones 52 0.00 True 0
+er200_c1_s1 sin DP 52 0.00 True 0
+er200_c1_s1 sin division 52 0.00 True 0
+er200_c1_s1 sin Monte Carlo 52 0.00 True 0
+er200_c2_s0 HyVC completo 77 0.00 True 0
+er200_c2_s0 sin reducciones 77 0.00 True 0
+er200_c2_s0 sin DP 77 0.00 True 0
+er200_c2_s0 sin division 77 0.00 True 0
+er200_c2_s0 sin Monte Carlo 77 0.00 True 0
+er200_c2_s1 HyVC completo 81 0.00 True 0
+er200_c2_s1 sin reducciones 81 0.00 True 0
+er200_c2_s1 sin DP 81 0.00 True 0
+er200_c2_s1 sin division 81 0.00 True 0
+er200_c2_s1 sin Monte Carlo 81 0.00 True 0
+er200_c3_s0 HyVC completo 92 0.00 True 0
+er200_c3_s0 sin reducciones 92 4.62 True 24
+er200_c3_s0 sin DP 92 0.00 True 0
+er200_c3_s0 sin division 92 0.00 True 0
+er200_c3_s0 sin Monte Carlo 92 0.00 True 0
+er200_c3_s1 HyVC completo 94 0.00 True 0
+er200_c3_s1 sin reducciones 94 7.65 True 64
+er200_c3_s1 sin DP 94 0.00 True 0
+er200_c3_s1 sin division 94 0.00 True 0
+er200_c3_s1 sin Monte Carlo 94 0.00 True 0
+er200_c4_s0 HyVC completo 102 0.00 True 0
+er200_c4_s0 sin reducciones 105 10.00 False 73
+er200_c4_s0 sin DP 102 0.00 True 0
+er200_c4_s0 sin division 102 0.00 True 0
+er200_c4_s0 sin Monte Carlo 102 0.00 True 0
+er200_c4_s1 HyVC completo 106 0.03 True 16
+er200_c4_s1 sin reducciones 110 10.68 False 81
+er200_c4_s1 sin DP 106 0.02 True 25
+er200_c4_s1 sin division 106 0.02 True 16
+er200_c4_s1 sin Monte Carlo 106 0.02 True 16
+er200_c6_s0 HyVC completo 117 0.54 True 560
+er200_c6_s0 sin reducciones 122 10.60 False 87
+er200_c6_s0 sin DP 117 0.28 True 712
+er200_c6_s0 sin division 117 0.51 True 570
+er200_c6_s0 sin Monte Carlo 117 0.55 True 570
+er200_c6_s1 HyVC completo 120 3.11 True 4234
+er200_c6_s1 sin reducciones 124 10.24 False 113
+er200_c6_s1 sin DP 120 1.80 True 4872
+er200_c6_s1 sin division 120 3.50 True 4252
+er200_c6_s1 sin Monte Carlo 120 3.17 True 4270
+band400_b8_s0 HyVC completo 258 0.02 True 0
+band400_b8_s0 sin reducciones 258 0.03 True 0
+band400_b8_s0 sin DP 262 10.02 False 25471
+band400_b8_s0 sin division 258 0.02 True 0
+band400_b8_s0 sin Monte Carlo 258 0.02 True 0
+band400_b8_s1 HyVC completo 261 0.02 True 0
+band400_b8_s1 sin reducciones 261 0.02 True 0
+band400_b8_s1 sin DP 261 0.83 True 2883
+band400_b8_s1 sin division 261 0.02 True 0
+band400_b8_s1 sin Monte Carlo 261 0.02 True 0
+band400_b12_s0 HyVC completo 287 0.23 True 0
+band400_b12_s0 sin reducciones 287 0.30 True 0
+band400_b12_s0 sin DP 296 10.03 False 37823
+band400_b12_s0 sin division 287 0.24 True 0
+band400_b12_s0 sin Monte Carlo 287 0.21 True 0
+band400_b12_s1 HyVC completo 287 1.93 True 4
+band400_b12_s1 sin reducciones 287 2.42 True 6
+band400_b12_s1 sin DP 299 10.03 False 40383
+band400_b12_s1 sin division 287 1.85 True 4
+band400_b12_s1 sin Monte Carlo 287 1.75 True 4
+band400_b16_s0 HyVC completo 311 10.04 False 123
+band400_b16_s0 sin reducciones 311 10.11 False 123
+band400_b16_s0 sin DP 311 10.04 False 30655
+band400_b16_s0 sin division 311 10.24 False 105
+band400_b16_s0 sin Monte Carlo 311 10.35 False 137
+band400_b16_s1 HyVC completo 307 10.10 False 96
+band400_b16_s1 sin reducciones 306 10.02 False 111
+band400_b16_s1 sin DP 307 10.04 False 28223
+band400_b16_s1 sin division 307 10.03 False 94
+band400_b16_s1 sin Monte Carlo 307 10.08 False 95
+ba1000_m2_s0 HyVC completo 416 0.00 True 0
+ba1000_m2_s0 sin reducciones 423 10.67 False 116
+ba1000_m2_s0 sin DP 416 0.00 True 0
+ba1000_m2_s0 sin division 416 0.00 True 0
+ba1000_m2_s0 sin Monte Carlo 416 0.00 True 0
+ba1000_m2_s1 HyVC completo 432 0.00 True 0
+ba1000_m2_s1 sin reducciones 439 10.02 False 140
+ba1000_m2_s1 sin DP 432 0.00 True 0
+ba1000_m2_s1 sin division 432 0.00 True 0
+ba1000_m2_s1 sin Monte Carlo 432 0.00 True 0
+ba1000_m3_s0 HyVC completo 490 0.00 True 0
+ba1000_m3_s0 sin reducciones 499 10.12 False 207
+ba1000_m3_s0 sin DP 490 0.00 True 0
+ba1000_m3_s0 sin division 490 0.00 True 0
+ba1000_m3_s0 sin Monte Carlo 490 0.00 True 0
+ba1000_m3_s1 HyVC completo 497 0.01 True 0
+ba1000_m3_s1 sin reducciones 509 10.11 False 229
+ba1000_m3_s1 sin DP 497 0.01 True 0
+ba1000_m3_s1 sin division 497 0.01 True 0
+ba1000_m3_s1 sin Monte Carlo 497 0.00 True 0
+ba1000_m5_s0 HyVC completo 606 10.08 False 6176
+ba1000_m5_s0 sin reducciones 606 10.32 False 343
+ba1000_m5_s0 sin DP 606 10.06 False 9535
+ba1000_m5_s0 sin division 606 10.06 False 5674
+ba1000_m5_s0 sin Monte Carlo 606 10.06 False 5199
+ba1000_m5_s1 HyVC completo 615 10.05 False 9258
+ba1000_m5_s1 sin reducciones 615 10.29 False 390
+ba1000_m5_s1 sin DP 615 10.06 False 13503
+ba1000_m5_s1 sin division 615 10.10 False 8432
+ba1000_m5_s1 sin Monte Carlo 615 10.05 False 8644

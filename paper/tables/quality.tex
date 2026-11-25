@@ -1,0 +1,13 @@
+\begin{table}[!htbp]\centering\scriptsize\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lrrrrrr@{}}\toprule
+Familia & \textsf{G-MaxDeg} & \textsf{G-FastVC} & \textsf{2-Approx} & \textsf{R-MC} & \textsf{R-MIS} & \textsf{HyVC} \\\midrule
+Erdős–Rényi $n{=}200$ & 1.037 & 1.042 & 1.839 & 1.186 & 1.149 & 1.000 \\
+Erdős–Rényi $n{=}500$ & 1.050 & 1.046 & 1.864 & 1.242 & 1.144 & 1.000 \\
+$k$-árbol parcial $n{=}300$ & 1.005 & 1.023 & 1.891 & 1.221 & 1.149 & 1.000 \\
+Banda $n{=}400$ & 1.036$^{4/6}$ & 1.046$^{4/6}$ & 1.416$^{4/6}$ & 1.170$^{4/6}$ & 1.092$^{4/6}$ & 1.000$^{4/6}$ \\
+Barabási–Albert $n{=}1000$ & 1.025$^{4/6}$ & 1.046$^{4/6}$ & 1.908$^{4/6}$ & 1.256$^{4/6}$ & 1.185$^{4/6}$ & 1.000$^{4/6}$ \\
+Trampa de Johnson & 2.950 & 1.000 & 2.000 & 1.717 & 2.258 & 1.000 \\
+Erdős–Rényi denso $n{=}60$ & 1.043 & 1.050 & 1.281 & 1.108 & 1.043 & 1.000 \\
+\midrule Todas & 1.168 & 1.037 & 1.790 & 1.237 & 1.218 & 1.000 \\
+\bottomrule\end{tabular}
+\caption{Razón media $|C|/\OPT$ (1.000 = óptimo). El superíndice $a/b$ indica que el algoritmo solo tiene óptimo certificado en $a$ de las $b$ instancias; la media se calcula sobre esas $a$. Los exactos \textsf{DP-TD} y \textsf{DC-WH} se omiten: cuando terminan su razón es 1 (ver \cref{tab:exactos}).}\label{tab:calidad}\end{table}

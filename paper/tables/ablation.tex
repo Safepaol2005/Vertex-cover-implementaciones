@@ -1,0 +1,22 @@
+\begin{table}[!htbp]\centering\small
+\begin{tabular}{@{}llrrr@{}}\toprule
+Familia & Variante & $\bar t$ (s) & exactas & nodos \\\midrule
+Erdős–Rényi $n{=}200$ & HyVC completo & 0.37 & 10/10 & 481 \\
+ & sin reducciones & 5.38 & 6/10 & 44 \\
+ & sin DP & 0.21 & 10/10 & 561 \\
+ & sin division & 0.40 & 10/10 & 484 \\
+ & sin Monte Carlo & 0.37 & 10/10 & 486 \\
+\addlinespace
+Banda $n{=}400$ & HyVC completo & 3.72 & 4/6 & 37 \\
+ & sin reducciones & 3.82 & 4/6 & 40 \\
+ & sin DP & 8.50 & 1/6 & 27573 \\
+ & sin division & 3.73 & 4/6 & 34 \\
+ & sin Monte Carlo & 3.74 & 4/6 & 39 \\
+\addlinespace
+Barabási–Albert $n{=}1000$ & HyVC completo & 3.36 & 4/6 & 2572 \\
+ & sin reducciones & 10.26 & 0/6 & 238 \\
+ & sin DP & 3.36 & 4/6 & 3840 \\
+ & sin division & 3.36 & 4/6 & 2351 \\
+ & sin Monte Carlo & 3.35 & 4/6 & 2307 \\
+\bottomrule\end{tabular}
+\caption{Ablación: se apaga una sección de \hyvc{} a la vez (límite 10\,s). Si una variante no termina, aporta 10\,s a la media.}\label{tab:ablacion}\end{table}

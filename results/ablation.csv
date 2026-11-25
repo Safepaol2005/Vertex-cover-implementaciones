@@ -1,0 +1,111 @@
+family,instance,variant,size,time_s,exact,nodes
+ER-n200,er200_c1_s0,HyVC completo,56,0.0001,True,0
+ER-n200,er200_c1_s0,sin reducciones,56,0.0028,True,0
+ER-n200,er200_c1_s0,sin DP,56,0.0001,True,0
+ER-n200,er200_c1_s0,sin division,56,0.0001,True,0
+ER-n200,er200_c1_s0,sin Monte Carlo,56,0.0001,True,0
+ER-n200,er200_c1_s1,HyVC completo,52,0.0001,True,0
+ER-n200,er200_c1_s1,sin reducciones,52,0.0023,True,0
+ER-n200,er200_c1_s1,sin DP,52,0.0001,True,0
+ER-n200,er200_c1_s1,sin division,52,0.0001,True,0
+ER-n200,er200_c1_s1,sin Monte Carlo,52,0.0001,True,0
+ER-n200,er200_c2_s0,HyVC completo,77,0.0002,True,0
+ER-n200,er200_c2_s0,sin reducciones,77,0.0041,True,0
+ER-n200,er200_c2_s0,sin DP,77,0.0002,True,0
+ER-n200,er200_c2_s0,sin division,77,0.0001,True,0
+ER-n200,er200_c2_s0,sin Monte Carlo,77,0.0001,True,0
+ER-n200,er200_c2_s1,HyVC completo,81,0.0001,True,0
+ER-n200,er200_c2_s1,sin reducciones,81,0.0048,True,0
+ER-n200,er200_c2_s1,sin DP,81,0.0002,True,0
+ER-n200,er200_c2_s1,sin division,81,0.0002,True,0
+ER-n200,er200_c2_s1,sin Monte Carlo,81,0.0001,True,0
+ER-n200,er200_c3_s0,HyVC completo,92,0.0002,True,0
+ER-n200,er200_c3_s0,sin reducciones,92,4.6204,True,24
+ER-n200,er200_c3_s0,sin DP,92,0.0003,True,0
+ER-n200,er200_c3_s0,sin division,92,0.0002,True,0
+ER-n200,er200_c3_s0,sin Monte Carlo,92,0.0002,True,0
+ER-n200,er200_c3_s1,HyVC completo,94,0.0003,True,0
+ER-n200,er200_c3_s1,sin reducciones,94,7.6467,True,64
+ER-n200,er200_c3_s1,sin DP,94,0.0003,True,0
+ER-n200,er200_c3_s1,sin division,94,0.0003,True,0
+ER-n200,er200_c3_s1,sin Monte Carlo,94,0.0003,True,0
+ER-n200,er200_c4_s0,HyVC completo,102,0.0004,True,0
+ER-n200,er200_c4_s0,sin reducciones,105,10.0041,False,73
+ER-n200,er200_c4_s0,sin DP,102,0.0004,True,0
+ER-n200,er200_c4_s0,sin division,102,0.0004,True,0
+ER-n200,er200_c4_s0,sin Monte Carlo,102,0.0003,True,0
+ER-n200,er200_c4_s1,HyVC completo,106,0.0272,True,16
+ER-n200,er200_c4_s1,sin reducciones,110,10.6835,False,81
+ER-n200,er200_c4_s1,sin DP,106,0.0171,True,25
+ER-n200,er200_c4_s1,sin division,106,0.0242,True,16
+ER-n200,er200_c4_s1,sin Monte Carlo,106,0.0174,True,16
+ER-n200,er200_c6_s0,HyVC completo,117,0.5362,True,560
+ER-n200,er200_c6_s0,sin reducciones,122,10.6045,False,87
+ER-n200,er200_c6_s0,sin DP,117,0.2802,True,712
+ER-n200,er200_c6_s0,sin division,117,0.5105,True,570
+ER-n200,er200_c6_s0,sin Monte Carlo,117,0.5488,True,570
+ER-n200,er200_c6_s1,HyVC completo,120,3.1105,True,4234
+ER-n200,er200_c6_s1,sin reducciones,124,10.2418,False,113
+ER-n200,er200_c6_s1,sin DP,120,1.8035,True,4872
+ER-n200,er200_c6_s1,sin division,120,3.4993,True,4252
+ER-n200,er200_c6_s1,sin Monte Carlo,120,3.1748,True,4270
+Banded,band400_b8_s0,HyVC completo,258,0.0239,True,0
+Banded,band400_b8_s0,sin reducciones,258,0.0254,True,0
+Banded,band400_b8_s0,sin DP,262,10.0224,False,25471
+Banded,band400_b8_s0,sin division,258,0.0225,True,0
+Banded,band400_b8_s0,sin Monte Carlo,258,0.0241,True,0
+Banded,band400_b8_s1,HyVC completo,261,0.0203,True,0
+Banded,band400_b8_s1,sin reducciones,261,0.0223,True,0
+Banded,band400_b8_s1,sin DP,261,0.8282,True,2883
+Banded,band400_b8_s1,sin division,261,0.0195,True,0
+Banded,band400_b8_s1,sin Monte Carlo,261,0.0196,True,0
+Banded,band400_b12_s0,HyVC completo,287,0.2322,True,0
+Banded,band400_b12_s0,sin reducciones,287,0.3023,True,0
+Banded,band400_b12_s0,sin DP,296,10.0318,False,37823
+Banded,band400_b12_s0,sin division,287,0.2387,True,0
+Banded,band400_b12_s0,sin Monte Carlo,287,0.2058,True,0
+Banded,band400_b12_s1,HyVC completo,287,1.9285,True,4
+Banded,band400_b12_s1,sin reducciones,287,2.4240,True,6
+Banded,band400_b12_s1,sin DP,299,10.0278,False,40383
+Banded,band400_b12_s1,sin division,287,1.8472,True,4
+Banded,band400_b12_s1,sin Monte Carlo,287,1.7512,True,4
+Banded,band400_b16_s0,HyVC completo,311,10.0443,False,123
+Banded,band400_b16_s0,sin reducciones,311,10.1056,False,123
+Banded,band400_b16_s0,sin DP,311,10.0364,False,30655
+Banded,band400_b16_s0,sin division,311,10.2414,False,105
+Banded,band400_b16_s0,sin Monte Carlo,311,10.3494,False,137
+Banded,band400_b16_s1,HyVC completo,307,10.0984,False,96
+Banded,band400_b16_s1,sin reducciones,306,10.0173,False,111
+Banded,band400_b16_s1,sin DP,307,10.0426,False,28223
+Banded,band400_b16_s1,sin division,307,10.0319,False,94
+Banded,band400_b16_s1,sin Monte Carlo,307,10.0822,False,95
+BA-n1000,ba1000_m2_s0,HyVC completo,416,0.0018,True,0
+BA-n1000,ba1000_m2_s0,sin reducciones,423,10.6693,False,116
+BA-n1000,ba1000_m2_s0,sin DP,416,0.0020,True,0
+BA-n1000,ba1000_m2_s0,sin division,416,0.0019,True,0
+BA-n1000,ba1000_m2_s0,sin Monte Carlo,416,0.0018,True,0
+BA-n1000,ba1000_m2_s1,HyVC completo,432,0.0020,True,0
+BA-n1000,ba1000_m2_s1,sin reducciones,439,10.0209,False,140
+BA-n1000,ba1000_m2_s1,sin DP,432,0.0019,True,0
+BA-n1000,ba1000_m2_s1,sin division,432,0.0019,True,0
+BA-n1000,ba1000_m2_s1,sin Monte Carlo,432,0.0018,True,0
+BA-n1000,ba1000_m3_s0,HyVC completo,490,0.0048,True,0
+BA-n1000,ba1000_m3_s0,sin reducciones,499,10.1241,False,207
+BA-n1000,ba1000_m3_s0,sin DP,490,0.0049,True,0
+BA-n1000,ba1000_m3_s0,sin division,490,0.0047,True,0
+BA-n1000,ba1000_m3_s0,sin Monte Carlo,490,0.0047,True,0
+BA-n1000,ba1000_m3_s1,HyVC completo,497,0.0051,True,0
+BA-n1000,ba1000_m3_s1,sin reducciones,509,10.1119,False,229
+BA-n1000,ba1000_m3_s1,sin DP,497,0.0053,True,0
+BA-n1000,ba1000_m3_s1,sin division,497,0.0051,True,0
+BA-n1000,ba1000_m3_s1,sin Monte Carlo,497,0.0049,True,0
+BA-n1000,ba1000_m5_s0,HyVC completo,606,10.0789,False,6176
+BA-n1000,ba1000_m5_s0,sin reducciones,606,10.3231,False,343
+BA-n1000,ba1000_m5_s0,sin DP,606,10.0618,False,9535
+BA-n1000,ba1000_m5_s0,sin division,606,10.0607,False,5674
+BA-n1000,ba1000_m5_s0,sin Monte Carlo,606,10.0585,False,5199
+BA-n1000,ba1000_m5_s1,HyVC completo,615,10.0507,False,9258
+BA-n1000,ba1000_m5_s1,sin reducciones,615,10.2928,False,390
+BA-n1000,ba1000_m5_s1,sin DP,615,10.0629,False,13503
+BA-n1000,ba1000_m5_s1,sin division,615,10.0969,False,8432
+BA-n1000,ba1000_m5_s1,sin Monte Carlo,615,10.0473,False,8644

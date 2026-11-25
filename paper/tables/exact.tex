@@ -1,0 +1,14 @@
+\begin{table}[!htbp]\centering\small
+\begin{tabular}{@{}lrrrrrr@{}}\toprule
+ & \multicolumn{2}{c}{\textsf{DP-TD}} & \multicolumn{2}{c}{\textsf{DC-WH}} & \multicolumn{2}{c}{\hyvc} \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(l){6-7}
+Familia & resueltas & $\bar t$ (s) & resueltas & $\bar t$ (s) & resueltas & $\bar t$ (s) \\\midrule
+Erdős–Rényi $n{=}200$ & 6/15 & 0.00 & 6/15 & 4.32 & 15/15 & 0.42 \\
+Erdős–Rényi $n{=}500$ & 0/4 & --- & 0/4 & --- & 4/4 & 0.37 \\
+$k$-árbol parcial $n{=}300$ & 9/9 & 0.03 & 9/9 & 0.02 & 9/9 & 0.00 \\
+Banda $n{=}400$ & 2/6 & 0.02 & 0/6 & --- & 4/6 & 0.46 \\
+Barabási–Albert $n{=}1000$ & 0/6 & --- & 0/6 & --- & 4/6 & 0.00 \\
+Trampa de Johnson & 0/3 & --- & 2/3 & 1.19 & 3/3 & 0.00 \\
+Erdős–Rényi denso $n{=}60$ & 0/3 & --- & 3/3 & 0.13 & 3/3 & 0.14 \\
+\midrule Total & 17/46 &  & 20/46 &  & 42/46 &  \\
+\bottomrule\end{tabular}
+\caption{Algoritmos exactos: instancias resueltas con optimalidad probada (límite 20\,s; \textsf{DP-TD} se rinde si el ancho supera 16) y tiempo medio sobre las resueltas.}\label{tab:exactos}\end{table}
