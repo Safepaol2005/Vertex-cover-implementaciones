@@ -1,0 +1,9 @@
+\begin{table}[!htbp]\centering\small
+\begin{tabular}{@{}lrrrrrrrr@{}}\toprule
+ & \multicolumn{2}{c}{\alg{PD-TD}} & \multicolumn{2}{c}{\alg{DyV-WH}} & \multicolumn{2}{c}{\hyvc} & \multicolumn{2}{c}{\textsc{WeGotYouCovered}$^\dagger$} \\\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(l){8-9}
+Conjunto & res. & $\tilde t$ (s) & res. & $\tilde t$ (s) & res. & $\tilde t$ (s) & res. & $\tilde t$ (s) \\\midrule
+PACE 2019 (200) & 13 & 0.29 & 13 & 0.01 & 30 & 0.00 & 155 & 2.10 \\
+PACE 2017 (200) & 137 & 0.00 & 65 & 0.12 & 198 & 0.00 & \multicolumn{2}{c}{---} \\
+Sintéticas (35) & 8 & 0.01 & 5 & 0.00 & 25 & 0.00 & \multicolumn{2}{c}{---} \\
+\bottomrule\end{tabular}
+\caption{Instancias resueltas con optimalidad probada en 10\,s y mediana del tiempo sobre las resueltas. $^\dagger$Tiempos publicados por sus autores~\citep{hespe2020} en su propio hardware; se cuentan las instancias que resolvió en 10\,s o menos.}\label{tab:exactos}\end{table}

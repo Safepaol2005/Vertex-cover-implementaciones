@@ -1,11 +1,12 @@
-__pycache__/
-*.pyc
+bin/
+data/pace2019/
+data/pace2017/
 *.aux
 *.log
 *.out
+*.toc
 *.fls
 *.fdb_latexmk
 *.bbl
 *.blg
-*.synctex.gz
-!results/*.log
+__pycache__/

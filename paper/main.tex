@@ -2,7 +2,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
-\usepackage{array}
 \IfFileExists{spanish.ldf}{\usepackage[spanish,es-nodecimaldot,es-noshorthands]{babel}}{%
   \usepackage[english]{babel}%
   \addto\captionsenglish{\renewcommand{\abstractname}{Resumen}\renewcommand{\refname}{Referencias}%
@@ -10,7 +9,7 @@
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
-\usepackage{booktabs,tabularx,multirow}
+\usepackage{array,booktabs,tabularx,multirow}
 \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
 \usepackage[numbers,sort&compress]{natbib}
 \usepackage{xcolor}
@@ -18,23 +17,33 @@
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
 \usepackage[nameinlink,noabbrev]{cleveref}
 \crefname{section}{sección}{secciones}\Crefname{section}{Sección}{Secciones}
+\crefname{subsection}{sección}{secciones}
 \crefname{table}{tabla}{tablas}\Crefname{table}{Tabla}{Tablas}
 \crefname{figure}{figura}{figuras}\Crefname{figure}{Figura}{Figuras}
-\crefname{lemma}{lema}{lemas}\crefname{theorem}{teorema}{teoremas}
-\crefname{appendix}{apéndice}{apéndices}\crefname{algocf}{algoritmo}{algoritmos}
+\crefname{lemma}{lema}{lemas}\crefname{theorem}{teorema}{teoremas}\crefname{proposition}{proposición}{proposiciones}
+\crefname{algocf}{algoritmo}{algoritmos}\Crefname{algocf}{Algoritmo}{Algoritmos}
+\crefname{appendix}{apéndice}{apéndices}\crefname{definition}{definición}{definiciones}
 
-\newtheorem{lemma}{Lema}
 \newtheorem{theorem}{Teorema}
-\newtheorem{proposition}{Proposición}
+\newtheorem{lemma}[theorem]{Lema}
+\newtheorem{proposition}[theorem]{Proposición}
+\newtheorem{corollary}[theorem]{Corolario}
 \theoremstyle{definition}
 \newtheorem{definition}{Definición}
+\newtheorem{example}{Ejemplo}
+\theoremstyle{remark}
+\newtheorem*{remark}{Observación}
 \SetKwComment{Comment}{$\triangleright$\ }{}
 \SetAlgorithmName{Algoritmo}{algoritmo}{Lista de algoritmos}
+\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \newcommand{\OPT}{\mathrm{OPT}}
+\newcommand{\tw}{\mathrm{tw}}
 \newcommand{\hyvc}{\textsc{HyVC}}
+\newcommand{\alg}[1]{\textsf{#1}}
 
-\title{\hyvc: un algoritmo híbrido para \textsc{Minimum Vertex Cover}\\
-\large construido a partir de la comparación sección por sección de\\ algoritmos voraces, de programación dinámica, de divide y vencerás y aleatorizados}
+\title{\textbf{Vertex Cover en la práctica:}\\[2pt]
+\large tres paradigmas clásicos ---voraz, programación dinámica y aleatorizado---\\
+y un algoritmo híbrido construido a partir de su comparación}
 \author{Samuel Felipe Palacios Olaya \and Juan Diego Díaz Ávila\\[2pt]
 \small Universidad Nacional de Colombia --- Topics on Advanced Algorithms}
 \date{Noviembre de 2026}
@@ -43,194 +52,27 @@
 \maketitle
 
 \begin{abstract}
-El problema de la cubierta mínima de vértices (\textsc{MVC}) es NP-difícil y, bajo la conjetura de juegos únicos, no admite aproximaciones con factor constante menor que $2$. La literatura lo ataca con paradigmas muy distintos: heurísticas voraces de costo lineal, programación dinámica sobre descomposiciones en árbol, esquemas de divide y vencerás que ramifican y separan componentes, y algoritmos aleatorizados tipo Monte Carlo. En este trabajo seleccionamos un artículo representativo de cada paradigma, descomponemos cada algoritmo en las mismas \emph{secciones} (representación, preprocesamiento, regla de selección, descomposición, cotas, post-procesamiento, garantía y régimen favorable) y comparamos sección por sección. De esa comparación derivamos \hyvc, un algoritmo híbrido que reduce el grafo con reglas exactas, lo divide en componentes, resuelve por programación dinámica las componentes cuya tabla estimada es pequeña y por \emph{branch \& reduce} el resto, usando una cota superior Monte Carlo para podar. \hyvc{} siempre devuelve una cubierta válida y certifica optimalidad cuando termina. Implementamos en Python los cuatro algoritmos base y el híbrido, y los evaluamos sobre \input{tables/n_instances.tex}instancias de seis familias, con el óptimo obtenido por CP-SAT como referencia. \input{tables/abstract_numbers.tex}
+\input{sections/abstract}
 \end{abstract}
 
-\section{Introducción}
-Dado un grafo no dirigido $G=(V,E)$, una \emph{cubierta de vértices} es un conjunto $C\subseteq V$ tal que toda arista tiene al menos un extremo en $C$; el problema \textsc{MVC} pide una de cardinalidad mínima, $\tau(G)=\OPT(G)$. Es uno de los 21 problemas NP-completos de Karp~\citep{karp1972} y el algoritmo de matching maximal da una $2$-aproximación que, bajo la conjetura de juegos únicos, no puede mejorarse a $2-\varepsilon$~\citep{khot2008ugc}.
+\tableofcontents
+\newpage
 
-En la práctica conviven al menos cuatro familias de algoritmos que rara vez se comparan entre sí con la misma vara:
-\begin{enumerate}
-  \item \textbf{Voraces}, de tiempo casi lineal, como la construcción de FastVC~\citep{cai2015fastvc,cai2017jair} o la regla de grado máximo;
-  \item \textbf{Programación dinámica} sobre una descomposición en árbol, exacta en tiempo $O^*(2^{\mathrm{tw}})$~\citep{bannach2018practical,alber2005experimental};
-  \item \textbf{Divide y vencerás}, que ramifica sobre un vértice y resuelve por separado las componentes que aparecen~\citep{weigt2001minimal}, o que aplica reducciones locales sobre subgrafos disjuntos~\citep{asgeirsson2009dc};
-  \item \textbf{Aleatorizados}, como el greedy con probabilidades proporcionales a $\deg^\gamma$~\citep{gao2018randomized} o el conjunto independiente maximal en orden aleatorio~\citep{veldt2022growing}.
-\end{enumerate}
-
-\paragraph{Contribuciones.} (i) Una comparación \emph{por secciones} de cinco algoritmos publicados (\cref{sec:comparacion}), que hace explícito qué parte de cada uno es la que realmente aporta. (ii) \hyvc{} (\cref{sec:hyvc}), un algoritmo que ensambla la mejor sección de cada paradigma, con prueba de corrección. (iii) Una implementación abierta en Python de los cinco algoritmos y del híbrido, con pruebas contra fuerza bruta y contra CP-SAT, y (iv) una evaluación experimental que incluye un estudio de ablación para medir la contribución de cada sección (\cref{sec:resultados}).
-
-\section{Preliminares}\label{sec:prelim}
-Escribimos $n=|V|$, $m=|E|$, $N(v)$ para la vecindad de $v$, $N[v]=N(v)\cup\{v\}$ y $\deg(v)=|N(v)|$. El grado medio es $c=2m/n$.
-
-\begin{definition}[Descomposición en árbol]
-Una descomposición en árbol de $G$ es un árbol $T$ con bolsas $B_t\subseteq V$ tal que (a) toda arista está contenida en alguna bolsa y (b) para cada $v$, los nodos cuyas bolsas contienen a $v$ forman un subárbol conexo. Su ancho es $\max_t|B_t|-1$; el \emph{treewidth} $\mathrm{tw}(G)$ es el mínimo ancho posible~\citep{cygan2015parameterized}.
-\end{definition}
-
-\begin{definition}[Monte Carlo y Las Vegas]
-Un algoritmo aleatorizado es \emph{Las Vegas} si su salida es siempre correcta y solo su tiempo es aleatorio; es \emph{Monte Carlo} si su tiempo está acotado pero la salida puede ser incorrecta con probabilidad acotada. Para un problema de optimización, ``correcta'' significa óptima (o $\alpha$-aproximada); todos los algoritmos que estudiamos devuelven siempre una cubierta \emph{factible}, así que el azar afecta únicamente su \emph{calidad}.
-\end{definition}
-
-\section{Artículos seleccionados}\label{sec:articulos}
-Elegimos un artículo principal por paradigma y, cuando aporta una sección relevante, uno complementario. La \cref{tab:articulos} los resume.
-
-\begin{table}[!htbp]
-\centering\small
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.0cm} >{\raggedright\arraybackslash}p{3.3cm} >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.2cm}@{}}
-\toprule
-Paradigma & Artículo & Idea central & Garantía \\
-\midrule
-Voraz & Cai~\citep{cai2015fastvc}; Cai, Lin y Luo~\citep{cai2017jair} & Recorre aristas; si una está descubierta toma el extremo de mayor grado; luego elimina vértices redundantes. $O(m)$. & Ninguna \\
-Voraz (referencia) & Weigt y Hartmann~\citep{weigt2001minimal} & Toma repetidamente el vértice de mayor grado residual. & $\Theta(\log n)$~\citep{johnson1974} \\
-Prog.\ dinámica & Bannach y Berndt~\citep{bannach2018practical,bannach2019algorithms}; Alber et al.~\citep{alber2005experimental} & Tablas sobre subconjuntos de cada bolsa de una descomposición en árbol (operaciones \emph{introduce}, \emph{forget} y \emph{join}). & Exacto, $O^*(2^{\mathrm{tw}})$ \\
-Divide y vencerás & Weigt y Hartmann~\citep{weigt2001minimal} & Ramifica en el vértice de mayor grado ($v\in C$ o $N(v)\subseteq C$) y resuelve por separado cada componente conexa resultante. & Exacto, exponencial \\
-D\&V (aprox.) & Ásgeirsson y Stein~\citep{asgeirsson2009dc} & Aplica reducciones locales (óptimas y $3/2$-aproximadas) a subgrafos disjuntos; la razón global es la peor de las piezas. & $3/2$ si termina \\
-Aleatorizado & Gao, Friedrich, Neumann y Hercher~\citep{gao2018randomized} & Elige $u$ con probabilidad proporcional a $\deg(u)^\gamma$; repetir $R$ veces (Monte Carlo). & $2$ en esperanza ($\gamma=1$) \\
-Aleatorizado & Veldt~\citep{veldt2022growing} & Conjunto independiente maximal en orden aleatorio uniforme; la cubierta es su complemento. & $2$ en esperanza \\
-\bottomrule
-\end{tabularx}
-\caption{Artículos seleccionados por paradigma. Como contexto adicional usamos Akiba e Iwata~\citep{akiba2016branch} (branch \& reduce en la práctica) y Clinch et al.~\citep{clinch2025faster} (ramificación aleatorizada).}
-\label{tab:articulos}
-\end{table}
-
-\subsection{Voraz: la construcción de FastVC}
-FastVC~\citep{cai2015fastvc,cai2017jair} es un algoritmo de búsqueda local para grafos masivos cuya fase de \emph{construcción} es un greedy por aristas: cada arista descubierta se cubre con su extremo de mayor grado, y la cubierta resultante se depura eliminando los vértices cuyos vecinos ya están todos cubiertos. Los autores la eligen precisamente porque cuesta $O(m)$, frente al $O(n^2)$ del greedy de grado máximo usado por algoritmos anteriores. El greedy de grado máximo, por su parte, es la cota superior que Weigt y Hartmann usan para inicializar su búsqueda exacta~\citep{weigt2001minimal}; su debilidad conocida es la familia bipartita de Johnson~\citep{johnson1974}, en la que queda a un factor $\Theta(\log n)$ del óptimo.
-
-\subsection{Programación dinámica sobre descomposiciones en árbol}
-Bannach y Berndt~\citep{bannach2018practical,bannach2019algorithms} estudian cuán práctica es la programación dinámica sobre descomposiciones en árbol y la implementan como un verificador de un fragmento de MSO; \textsc{Vertex Cover} es uno de sus casos de prueba, con estados que son vectores de bits por bolsa y tiempo $O^*(2^k)$. Alber, Dorn y Niedermeier~\citep{alber2005experimental} habían evaluado experimentalmente un esquema equivalente para \textsc{VC} en grafos planares, donde $\mathrm{tw}=O(\sqrt n)$. En ambos casos la sección decisiva es \emph{cómo se obtiene la descomposición}: el algoritmo es lineal en $n$ pero exponencial en el ancho.
-
-\subsection{Divide y vencerás}
-Weigt y Hartmann~\citep{weigt2001minimal} resuelven exactamente \textsc{MVC} en grafos aleatorios con un procedimiento recursivo: toman el vértice libre de mayor grado, abren dos ramas (cubrirlo, o descubrirlo y cubrir a todos sus vecinos) y, en cada rama, \emph{parten el grafo residual en componentes conexas que resuelven de forma independiente}, sumando los tamaños. Debajo del umbral de percolación las componentes son de tamaño $O(\log n)$ y el método es rápido; para grados medios grandes los autores cambian a un \emph{branch \& bound} sin separación. Ásgeirsson y Stein~\citep{asgeirsson2009dc} proponen un divide y vencerás distinto: un lazo de reducciones (grado $0$, $1$, $2$, eliminación de triángulos y de 5-ciclos, red de flujo para la relajación LP) que fija la pertenencia de piezas disjuntas del grafo y garantiza una razón $3/2$ cuando termina.
-
-\subsection{Aleatorizado: greedy con probabilidades $\deg^\gamma$}
-Gao et al.~\citep{gao2018randomized} reemplazan la elección determinista del greedy por un muestreo con probabilidad proporcional a $\deg(u)^\gamma$. Con $\gamma=1$ prueban que la razón esperada es $2$, porque en cada paso se elige un vértice de una cubierta óptima con probabilidad al menos $1/2$; con $\gamma=0$ la elección es uniforme y con $\gamma\to\infty$ se recupera el greedy determinista con desempates aleatorios. Repetir el algoritmo y quedarse con la mejor cubierta es un esquema Monte Carlo: la probabilidad de obtener una $\alpha$-aproximación crece con el número de corridas. El algoritmo de Veldt~\citep{veldt2022growing} es la contraparte $O(m)$: el complemento de un conjunto independiente maximal construido en orden aleatorio también es $2$-aproximado en esperanza.
-
-\section{Comparación sección por sección}\label{sec:comparacion}
-Para comparar algoritmos de paradigmas distintos los descomponemos en las mismas ocho secciones. La \cref{tab:secciones} es la matriz completa; debajo discutimos qué variante de cada sección es la mejor y por qué.
-
-\begin{table}[p]
-\centering\footnotesize
-\renewcommand{\arraystretch}{1.25}
-\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash\bfseries}p{2.3cm} *{4}{>{\raggedright\arraybackslash}X}@{}}
-\toprule
-Sección & Voraz (FastVC) & Prog.\ dinámica (TD) & Divide y vencerás (WH / ÁS) & Aleatorizado (Gao et al.) \\
-\midrule
-Represen\-tación & Lista de adyacencia y grados; una pasada por las aristas. & Descomposición en árbol; tabla de $2^{|B_t|}$ entradas por bolsa. & Grafo residual con vértices libres/cubiertos; listas por grado. & Vector de pesos $\deg^\gamma$ actualizado tras cada elección. \\
-Preproce\-samiento & Ninguno (la versión JAIR añade reducciones como paso aparte). & Cálculo de la descomposición (heurística). & ÁS: reducciones óptimas grado 0/1/2, LP, triángulos. WH: ninguno. & Ninguno. \\
-Regla de selección & Extremo de mayor grado de cada arista descubierta. & No hay: enumera todos los estados de la bolsa. & Vértice de mayor grado (WH); dos ramas $v$ / $N(v)$. & Muestreo $\propto\deg^\gamma$. \\
-Descompo\-sición & No descompone. & Estructural: separadores = bolsas. & \textbf{Componentes conexas tras cada rama} (WH); piezas disjuntas reducidas (ÁS). & No descompone. \\
-Cotas & No usa. & No usa (exhaustiva por bolsa). & WH: greedy como cota superior; B\&B con cota de grados. & Mejor de $R$ corridas. \\
-Post-proceso & \textbf{Elimina redundantes} (pérdida $0$). & Reconstrucción descendente. & ÁS: elimina redundantes al final. & Ninguno. \\
-Garantía & Ninguna (heurística). & \textbf{Óptimo.} & Óptimo (WH); $3/2$ si termina (ÁS). & $2$ en esperanza; Monte Carlo para $\alpha<2$. \\
-Complejidad & $O(m)$. & $O(2^{w}\,w\,n)$, $w$ = ancho obtenido. & Exponencial; polinomial si las componentes son $O(\log n)$. & $O(R\,n^2)$ (ingenuo). \\
-Régimen favorable & Grafos masivos y dispersos. & \textbf{Ancho de árbol pequeño} (árboles, planares pequeños, $k$-árboles parciales). & Grafos ralos que se fragmentan ($c\lesssim 2$). & Instancias que engañan al greedy determinista. \\
-Debilidad & Sin garantía; sensible al orden de aristas. & Inviable si $\mathrm{tw}\gtrsim 20$. & Explota cuando el grafo no se fragmenta. & Peor que el greedy con $\gamma$ pequeño; costo de repetir. \\
-\bottomrule
-\end{tabularx}
-\caption{Matriz comparativa por secciones. En negrita, la variante que \hyvc{} adopta en cada sección.}
-\label{tab:secciones}
-\end{table}
-
-\paragraph{Preprocesamiento.} Solo el divide y vencerás de Ásgeirsson y Stein reduce el grafo antes de decidir, y es la sección que más trabajo elimina: en sus experimentos la eliminación de triángulos sola retira la gran mayoría de los vértices~\citep{asgeirsson2009dc}. Akiba e Iwata~\citep{akiba2016branch} confirman que un conjunto rico de reglas de reducción vuelve competitivo un algoritmo exacto en grafos reales grandes. Elegimos las reglas exactas (grado $0$, $1$, $2$ con triángulo, \emph{folding} de grado $2$ y dominancia) y descartamos las aproximadas ($3/2$, $5/3$), porque queremos un algoritmo exacto cuando termina.
-
-\paragraph{Regla de selección.} Para \emph{construir} una solución rápida, la regla por aristas de FastVC cuesta $O(m)$ y el greedy aleatorizado escapa a las trampas del greedy determinista. Para \emph{ramificar}, el vértice de mayor grado es el que más reduce el grafo en la rama $N(v)$; Akiba e Iwata observan empíricamente que es significativamente mejor que elegir el de grado mínimo o uno al azar~\citep{akiba2016branch}. Adoptamos ambas: muestreo $\deg^\gamma$ y FastVC para la cota superior, grado máximo para ramificar.
-
-\paragraph{Descomposición.} Es la sección donde los paradigmas más difieren. La programación dinámica explota una descomposición \emph{global} pero solo funciona si el ancho es pequeño; Weigt y Hartmann explotan una descomposición \emph{dinámica}: cada decisión de ramificación puede desconectar el grafo, y resolver las componentes por separado convierte un producto de subárboles de búsqueda en una suma. Adoptamos la separación en componentes en \emph{cada} nodo y, además, despachamos a programación dinámica cualquier componente cuya PD sea barata. El criterio no es el ancho sino el \emph{costo} estimado $\kappa(H)=\sum_t 2^{|B_t|}$ (número de celdas de tabla) sobre la descomposición por grado mínimo: una primera versión con un umbral fijo de ancho ($W=10$) dejaba sin despachar grafos banda de ancho $12$ que la PD resuelve en centésimas de segundo, y los mandaba a una ramificación que no terminaba en 20\,s. Dentro de la búsqueda, en cambio, la PD puede invocarse miles de veces; por eso en los nodos internos el tope baja a $2^{16}$ celdas salvo en componentes de más de $100$ vértices, donde ramificar no tiene esperanza y una PD de hasta $2^{23}$ celdas sigue siendo la mejor opción. Sin esta segunda regla, en los Erdős--Rényi densos de $60$ vértices \hyvc{} gastaba $0.4$\,s en cada una de veinte PD sobre subgrafos que la ramificación resuelve en milisegundos.
-
-\paragraph{Cotas.} Ningún artículo combina cotas superiores aleatorizadas con búsqueda exacta. Usar la mejor de $R$ corridas Monte Carlo como cota superior inicial convierte el azar en poda: el resultado sigue siendo exacto, pero la búsqueda empieza más cerca del óptimo. Como cota inferior usamos $\max\{|M|,\lceil m/\Delta\rceil\}$, con $M$ un matching maximal.
-
-\paragraph{Post-proceso y garantía.} La eliminación de redundantes de FastVC es gratuita y nunca empeora una cubierta, así que la aplicamos a toda cota superior. De la programación dinámica y del divide y vencerás de Weigt y Hartmann heredamos la exactitud; de la búsqueda local heredamos el comportamiento \emph{anytime}: si se agota el tiempo, devolvemos la mejor cubierta encontrada junto con su brecha certificada.
-
-\section{El algoritmo híbrido \hyvc}\label{sec:hyvc}
-
-\subsection{Reglas de reducción}
-\begin{lemma}\label{lem:reducciones}
-Sean $G$ un grafo y $v\in V$. Cada una de las reglas siguientes produce $G'$ y un conjunto forzado $F$ con $\OPT(G)=\OPT(G')+|F|$ (o $+1$ en el caso de \emph{folding}), y de cualquier cubierta óptima de $G'$ se reconstruye una óptima de $G$:
-(R0) $\deg(v)=0$: borrar $v$.
-(R1) $\deg(v)=1$, $N(v)=\{u\}$: $u\in F$.
-(R2) $\deg(v)=2$, $N(v)=\{u,w\}$ con $uw\in E$: $u,w\in F$.
-(R3) \emph{folding}: $\deg(v)=2$, $N(v)=\{u,w\}$ con $uw\notin E$: contraer $\{u,v,w\}$ en un vértice nuevo $x$ con $N(x)=N(u)\cup N(w)\setminus\{v\}$; si $x\in C'$ se toma $\{u,w\}$, si no se toma $v$.
-(R4) dominancia: si $u\in N(v)$ y $N[u]\subseteq N[v]$, entonces $v\in F$.
-\end{lemma}
-\begin{proof}[Idea de la prueba]
-R0 es trivial. En R1 y R2, cualquier cubierta que contenga a $v$ puede cambiar $v$ por un vecino (R1) o, como el triángulo $\{u,v,w\}$ exige dos de sus vértices, por el vecino faltante (R2), sin aumentar su tamaño. En R4, si una cubierta óptima omite a $v$ contiene a $N(v)\supseteq N[u]\setminus\{v\}$, y entonces $u$ puede cambiarse por $v$. R3 es la regla clásica de plegado: si una cubierta de $G$ contiene a $u$ y $w$, puede suponerse que no contiene a $v$; si no, contiene a $v$ y basta con cubrir el resto. En ambos casos el tamaño cambia exactamente en $1$~\citep{cygan2015parameterized}.
-\end{proof}
-
-\subsection{Algoritmo}
-\begin{algorithm}[ht]
-\caption{\hyvc$(G, \kappa_{\max}, R, \gamma, T)$}\label{alg:hyvc}
-\KwIn{grafo $G$; tope de costo de la PD $\kappa_{\max}$; corridas Monte Carlo $R$; exponente $\gamma$; tiempo $T$}
-\KwOut{cubierta $C$ y bandera \textit{exacta}}
-$(G', F, \mathcal{P})\gets$ \textsc{Reducir}$(G)$ \Comment*[r]{R0--R4 hasta punto fijo}
-$C\gets\emptyset$; \textit{exacta} $\gets$ \textbf{verdadero}\;
-\ForEach{componente conexa $H$ de $G'$}{
-  \eIf{$\kappa(H)=\sum_{t}2^{|B_t|}\le\kappa_{\max}$ (descomposición por grado mínimo)}{
-    $C\gets C\cup$ \textsc{PD-Descomposición}$(H)$ \Comment*[r]{exacto, $O(\kappa(H)\cdot w)$}
-  }{
-    $U\gets$ mejor de \textsc{FastVC}$(H)$, \textsc{GradoMax}$(H)$ y $R$ corridas de \textsc{Greedy-}$\deg^\gamma(H)$, todas sin redundantes\;
-    $S\gets$ \textsc{Resolver}$(H, |U|)$ con límite de tiempo $T$\;
-    \lIf{se agotó el tiempo}{$S\gets U$; \textit{exacta} $\gets$ \textbf{falso}}
-    \lIf{$S=\bot$}{$S\gets U$ \Comment*[r]{no existe cubierta $<|U|$: $U$ es óptima}}
-    $C\gets C\cup S$\;
-  }
-}
-\Return \textsc{Desplegar}$(C\cup F,\mathcal{P})$, \textit{exacta}\;
-\end{algorithm}
-
-\begin{algorithm}[ht]
-\caption{\textsc{Resolver}$(H, b)$: cubierta mínima de $H$ si su tamaño es $<b$; si no, $\bot$}\label{alg:resolver}
-$(H',F,\mathcal{P})\gets$ \textsc{Reducir}$(H)$; $b\gets b-|F|-|\mathcal{P}|$\;
-\lIf{$b\le 0$}{\Return $\bot$}
-Sean $H_1,\dots,H_k$ las componentes de $H'$ con cotas inferiores $\ell_1,\dots,\ell_k$\;
-\lIf{$\sum_i\ell_i\ge b$}{\Return $\bot$}
-\For(\Comment*[f]{de la más pequeña a la más grande}){$i=1,\dots,k$}{
-  $b_i\gets b-\sum_{j<i}|S_j|-\sum_{j>i}\ell_j$\;
-  $\kappa'\gets\kappa_{\max}$ si $|V(H_i)|>100$; si no, $\kappa'\gets 2^{16}$\;
-  \lIf{$\kappa(H_i)\le\kappa'$}{$S_i\gets$ \textsc{PD}$(H_i)$ si $|S_i|<b_i$, si no $\bot$}
-  \Else{
-    $S_i\gets$ cota voraz si es $<b_i$ (y $b_i\gets|S_i|$)\;
-    $v\gets\arg\max\deg$\;
-    $S_i\gets$ la mejor entre $\{v\}\cup$\textsc{Resolver}$(H_i-v,\,b_i-1)$ y $N(v)\cup$\textsc{Resolver}$(H_i-N[v],\,b_i-|N(v)|)$\;
-  }
-  \lIf{$S_i=\bot$}{\Return $\bot$}
-}
-\Return \textsc{Desplegar}$(F\cup\bigcup_i S_i,\mathcal{P})$\;
-\end{algorithm}
-
-\begin{theorem}\label{thm:correccion}
-\hyvc{} devuelve siempre una cubierta de vértices de $G$. Si termina sin agotar el tiempo (\textit{exacta} $=$ verdadero), la cubierta es mínima.
-\end{theorem}
-\begin{proof}
-\emph{Factibilidad.} Cada componente recibe una cubierta factible (la de la PD, la de \textsc{Resolver} o la cota voraz $U$); las aristas eliminadas por las reglas quedan cubiertas por $F$ o por el despliegue de R3 (\cref{lem:reducciones}), y no hay aristas entre componentes distintas.
-\emph{Optimalidad.} Por el \cref{lem:reducciones} basta con resolver $G'$ óptimamente, y como $\OPT$ es aditivo sobre componentes basta con resolver cada componente. La PD sobre una descomposición válida es exacta. Para \textsc{Resolver} probamos por inducción en $|V(H)|$ que devuelve una cubierta mínima si $\OPT(H)<b$ y $\bot$ en otro caso. La poda por cotas inferiores es correcta porque $\ell_i\le\OPT(H_i)$. Si $\OPT(H_i)\ge b_i$, entonces $\sum_j\OPT(H_j)\ge\sum_{j<i}\OPT(H_j)+b_i+\sum_{j>i}\ell_j=b$, así que devolver $\bot$ es correcto; aquí usamos que, por hipótesis de inducción, cada $S_j$ con $j<i$ es óptima. La ramificación es exhaustiva, porque toda cubierta contiene a $v$ o a $N(v)$, y los presupuestos $b_i-1$ y $b_i-|N(v)|$ preservan la condición ``$<b_i$''. Finalmente, si \textsc{Resolver}$(H,|U|)=\bot$, ninguna cubierta de $H$ es menor que $U$, así que $U$ es óptima.
-\end{proof}
-
-\paragraph{Complejidad.} La reducción cuesta $O(\sum_v\deg(v)^2)$ por pasada por la regla de dominancia; la PD cuesta $O(\kappa\, w)$ con $\kappa\le\kappa_{\max}$ y $w$ el ancho; el peor caso de \textsc{Resolver} es el de la ramificación $T(k)\le T(k-1)+T(k-3)$ (tras las reducciones todo vértice tiene grado $\ge 3$), es decir, $O^*(1.4656^{k})$ con $k=\OPT$. Lo que cambia respecto a los algoritmos base no es la cota de peor caso sino el número de nodos que se exploran en la práctica: la división en componentes y la PD cortan ramas enteras, y la cota Monte Carlo poda desde la raíz.
-
-\section{Metodología experimental}\label{sec:metodologia}
-\paragraph{Implementación.} Todo está en Python~3.13 con \texttt{numpy} para las tablas de la PD (repositorio adjunto, \cref{app:codigo}). Los algoritmos base son implementaciones propias que siguen los artículos: \textsf{G-MaxDeg} (grado máximo), \textsf{G-FastVC} (construcción de FastVC), \textsf{2-Approx} (matching maximal), \textsf{R-MC} (Gao et al., $\gamma=1$, $R=16$), \textsf{R-MIS} (Veldt), \textsf{DP-TD} (PD sobre la descomposición por grado mínimo, ancho máximo $16$) y \textsf{DC-WH} (divide y vencerás de Weigt y Hartmann, sin cotas). \hyvc{} usa $\kappa_{\max}=2^{23}$ celdas en la raíz (y $2^{16}$ en nodos internos con componentes de hasta 100 vértices), $R=16$ y $\gamma=2$.
-\paragraph{Corrección.} Antes de medir, todos los algoritmos se verificaron contra fuerza bruta en 180 grafos de hasta 16 vértices y los exactos contra CP-SAT en 33 grafos de 40 a 150 vértices, sin discrepancias. En tres de esos grafos (Barabási--Albert con $n=150$) CP-SAT con un hilo no probó optimalidad en 30\,s; allí solo se comprobó que \hyvc{} certifica una cubierta del mismo tamaño que la mejor de CP-SAT.
-\paragraph{Instancias.} Seis familias (\cref{tab:familias}): Erdős--Rényi con grado medio $c\in\{1,2,3,4,6\}$ (el régimen estudiado por Weigt y Hartmann, con la transición en $c=e$), $k$-árboles parciales (ancho de árbol $\le k$, pero cordales y por tanto fáciles para las reducciones), grafos \emph{banda} con aristas aleatorias entre vértices a distancia $\le b$ (pathwidth $\le b$, no cordales: el régimen propio de la PD), Barabási--Albert (ley de potencias, similar a redes reales), la trampa bipartita de Johnson para el greedy y Erdős--Rényi densos.
-\paragraph{Referencia y límites.} El óptimo se obtuvo con OR-Tools CP-SAT (2 hilos, 30\,s). Cuando CP-SAT no probó optimalidad pero un algoritmo exacto nuestro sí terminó, se usó ese valor certificado. Los algoritmos exponenciales tienen un límite de 20\,s por instancia.
-
-\input{tables/families.tex}
-
-\section{Resultados}\label{sec:resultados}
-\input{results_text.tex}
-
-\section{Conclusiones}\label{sec:conclusiones}
-\input{conclusions_text.tex}
+\input{sections/01_introduccion}
+\input{sections/02_marco_teorico}
+\input{sections/03_voraz}
+\input{sections/04_dinamica}
+\input{sections/05_aleatorizado}
+\input{sections/06_comparacion}
+\input{sections/07_casos_prueba}
+\input{sections/08_hibrido}
+\input{sections/09_resultados}
+\input{sections/10_conclusiones}
 
 \bibliographystyle{plainnat}
 \bibliography{refs}
 
 \appendix
-\section{Código}\label{app:codigo}
-El código está organizado como sigue (ejecutar desde la raíz del proyecto):
-\begin{itemize}
-  \item \texttt{vc/greedy.py}, \texttt{vc/randomized.py}, \texttt{vc/dp\_treedec.py}, \texttt{vc/divide\_conquer.py}: algoritmos base.
-  \item \texttt{vc/reductions.py} y \texttt{vc/hybrid.py}: reglas R0--R4 y \hyvc.
-  \item \texttt{tests/}: pruebas contra fuerza bruta y contra CP-SAT.
-  \item \texttt{bench/run\_experiments.py} y \texttt{bench/make\_figures.py}: experimentos, tablas y figuras de este documento.
-\end{itemize}
+\input{sections/A_codigo}
 
 \end{document}

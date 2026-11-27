@@ -1,0 +1,95 @@
+\section{Marco teórico}\label{sec:marco}
+
+\subsection{El problema}\label{sec:def}
+Trabajamos con grafos simples no dirigidos $G=(V,E)$, con $n=|V|$ y $m=|E|$. $N(v)$ es la vecindad de $v$, $N[v]=N(v)\cup\{v\}$, $\deg(v)=|N(v)|$, $\Delta$ es el grado máximo y $\bar d=2m/n$ el grado medio.
+
+\begin{definition}[Cubierta de vértices]
+Un conjunto $C\subseteq V$ es una \emph{cubierta de vértices} si toda arista tiene al menos un extremo en $C$: $\{u,v\}\in E\Rightarrow u\in C$ o $v\in C$. El problema \textsc{Minimum Vertex Cover} (MVC) pide una cubierta de cardinalidad mínima; su tamaño se denota $\tau(G)=\OPT(G)$. En la versión de decisión se da además un entero $k$ y se pregunta si $\tau(G)\le k$.
+\end{definition}
+
+El problema tiene dos ``gemelos'' que conviene tener presentes, porque varios de los algoritmos que estudiamos trabajan en realidad sobre ellos.
+
+\begin{proposition}[Cubiertas, independientes y cliques]\label{prop:gallai}
+$C$ es una cubierta de $G$ si y solo si $V\setminus C$ es un conjunto independiente (no tiene aristas internas), y si y solo si $V\setminus C$ es una clique del grafo complemento $\overline G$. En consecuencia $\tau(G)+\alpha(G)=n$, donde $\alpha(G)$ es el tamaño del mayor conjunto independiente.
+\end{proposition}
+\begin{proof}
+Una arista con ambos extremos fuera de $C$ es exactamente una arista dentro de $V\setminus C$. La segunda equivalencia es la definición de $\overline G$.
+\end{proof}
+
+\paragraph{Matchings y la primera cota.} Un \emph{matching} $M\subseteq E$ es un conjunto de aristas sin extremos comunes; $\nu(G)$ es el tamaño del mayor. Cada arista de un matching necesita su propio vértice en cualquier cubierta, y los $2|M|$ extremos de un matching \emph{maximal} (al que no se le puede añadir ninguna arista) cubren todo el grafo, pues una arista descubierta podría añadirse a $M$. Por lo tanto
+\begin{equation}\label{eq:matching}
+\nu(G)\;\le\;\tau(G)\;\le\;2\,|M|\;\le\;2\,\nu(G)\qquad\text{para todo matching maximal }M.
+\end{equation}
+En grafos bipartitos la primera desigualdad es una igualdad: $\tau(G)=\nu(G)$ (teorema de Kőnig, 1931~\citep{konig1931}). Por eso MVC es polinomial en esa clase; con el algoritmo de Hopcroft y Karp~\citep{hopcroft1973} se resuelve en $O(m\sqrt n)$.
+
+\paragraph{Programación lineal.} MVC se escribe como el programa entero
+\begin{equation}\label{eq:ilp}
+\min\sum_{v\in V}x_v\quad\text{s.a.}\quad x_u+x_v\ge 1\ \ \forall\{u,v\}\in E,\qquad x_v\in\{0,1\}.
+\end{equation}
+Si se relaja $x_v\in[0,1]$, se obtiene un programa lineal cuyo óptimo $\mathrm{LP}(G)$ satisface $\mathrm{LP}(G)\le\tau(G)\le 2\,\mathrm{LP}(G)$. Nemhauser y Trotter~\citep{nemhauser1975} probaron dos hechos que reaparecerán en el algoritmo híbrido. Primero, la relajación siempre tiene un óptimo \emph{semientero}, con $x_v\in\{0,\tfrac12,1\}$. Segundo, existe una cubierta mínima que contiene a todos los vértices con $x_v=1$ y a ninguno con $x_v=0$. El valor $\mathrm{LP}(G)$ es la mitad del matching máximo del grafo bipartito ``doble'' de $G$, por lo que también se calcula con Hopcroft--Karp.
+
+\subsection{Dificultad}
+La versión de decisión es NP-completa~\citep{karp1972} y sigue siéndolo en grafos planares de grado máximo~3~\citep{garey1979}. Sí hay clases polinomiales que nos interesan porque los algoritmos estudiados las explotan:
+\begin{itemize}
+  \item \textbf{Bosques}: basta con repetir la regla ``si $v$ es una hoja, su vecino entra en la cubierta''.
+  \item \textbf{Bipartitos}: por el teorema de Kőnig, con un matching máximo.
+  \item \textbf{Ancho de árbol acotado}: con programación dinámica sobre una descomposición en árbol (\cref{sec:dp}).
+\end{itemize}
+
+\subsection{Una breve historia en cuatro frentes}\label{sec:historia}
+La \cref{tab:historia} resume la cronología. Agrupamos los avances en cuatro frentes, porque cada uno de los tres algoritmos que estudiamos nace en uno de ellos.
+
+\paragraph{1. Aproximación.} El algoritmo del matching maximal de \eqref{eq:matching}, atribuido a Gavril~\citep{garey1979}, da una $2$-aproximación en tiempo lineal. Bar-Yehuda y Even obtuvieron en 1981 una $2$-aproximación lineal para la versión ponderada~\citep{baryehuda1981}. En 1985, ellos mismos~\citep{baryehuda1985} y, de forma independiente, Monien y Speckenmeyer~\citep{monien1985} bajaron el factor a $2-\frac{\ln\ln n}{2\ln n}$. Karakostas lo mejoró a $2-\Theta(1/\sqrt{\log n})$ mediante programación semidefinida~\citep{karakostas2009}. Del lado de las cotas inferiores, aproximar por debajo de $1.3606$ es NP-difícil~\citep{dinur2005}, y bajo la conjetura de los juegos únicos ningún algoritmo polinomial logra $2-\varepsilon$~\citep{khot2008}. Es decir, en el peor caso no se espera nada mucho mejor que el matching. El algoritmo aleatorizado de Veldt (\cref{sec:rmis}) pertenece a este frente: no mejora el factor $2$, pero lo alcanza con un algoritmo distinto y muy simple~\citep{veldt2024}.
+
+\paragraph{2. Heurísticas voraces.} El voraz de grado máximo es el análogo para MVC del voraz de \textsc{Set Cover}. Johnson mostró en 1974 que ese voraz garantiza un factor $H(\Delta)=\sum_{i=1}^{\Delta}1/i\le 1+\ln\Delta$, y que hay instancias donde pierde un factor logarítmico~\citep{johnson1974}. Aun así, sobre grafos ``típicos'' funciona mucho mejor que su garantía. Weigt y Hartmann lo usan como heurística de referencia en su estudio de mecánica estadística~\citep{weigt2000,weigt2001}: estudian MVC en grafos aleatorios de grado medio $c$ y encuentran que el análisis de simetría de réplicas coincide con los datos numéricos hasta conectividad media $c=e$, que es donde esa simetría se vuelve inestable~\citep{weigt2000}. Ese umbral reaparece en nuestros experimentos.
+
+\paragraph{3. Algoritmos exactos y parametrizados.} Si $k$ es el tamaño buscado, ramificar sobre una arista $\{u,v\}$ ($u\in C$ o $v\in C$) da un árbol de búsqueda de tamaño $2^k$. Buss y Goldsmith mostraron que el problema admite un \emph{kernel}: un preproceso polinomial que lo reduce a un grafo con $O(k^2)$ aristas~\citep{buss1993}. La mejor cota parametrizada conocida con espacio polinomial es $O(1.2738^k+kn)$, de Chen, Kanj y Xia~\citep{chen2010}. Para grafos con ancho de árbol $w$, la programación dinámica da $O(2^w\,w\,n)$~\citep{cygan2015}, y Alber, Dorn y Niedermeier evaluaron experimentalmente esta idea en grafos planares~\citep{alber2005}. Bannach y Berndt estudiaron cómo hacerla práctica de forma general~\citep{bannach2019}.
+
+\paragraph{4. Ingeniería de algoritmos.} En la práctica los mejores solucionadores exactos combinan reglas de reducción, cotas inferiores y ramificación (\emph{branch \& reduce}). Akiba e Iwata mostraron que este enfoque, nacido de la teoría parametrizada, resuelve grafos reales grandes~\citep{akiba2016}. En 2019, el reto PACE dedicó su primer track a \textsc{Vertex Cover} exacto con 200 instancias de orígenes variados~\citep{dzulfikar2019}. Lo ganó \textsc{WeGotYouCovered}, un portafolio de reducción exhaustiva, búsqueda local iterada, \emph{branch \& reduce} y un solucionador de clique máxima~\citep{hespe2020}. Lo tomamos como el estado del arte de referencia (\cref{sec:sota}).
+
+\begin{table}[!htbp]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X l@{}}
+\toprule
+Año & Resultado & Frente \\
+\midrule
+1931 & Kőnig: $\tau=\nu$ en grafos bipartitos~\citep{konig1931} & teoría \\
+1972 & Karp: \textsc{Vertex Cover} es NP-completo~\citep{karp1972} & complejidad \\
+1974 & Johnson: el voraz para \textsc{Set Cover} logra $H(\Delta)$ y puede perder $\Theta(\log n)$~\citep{johnson1974} & voraz \\
+1975 & Nemhauser--Trotter: la relajación LP es semientera~\citep{nemhauser1975} & teoría / exacto \\
+1979 & Garey--Johnson: $2$-aproximación por matching (Gavril); NP-completo en planares de grado 3~\citep{garey1979} & aproximación \\
+1981 & Bar-Yehuda--Even: $2$-aproximación lineal ponderada~\citep{baryehuda1981} & aproximación \\
+1985 & Bar-Yehuda--Even; Monien--Speckenmeyer: $2-\frac{\ln\ln n}{2\ln n}$~\citep{baryehuda1985,monien1985} & aproximación \\
+1987 & Arnborg--Corneil--Proskurowski: calcular el ancho de árbol es NP-difícil~\citep{arnborg1987} & estructura \\
+1993 & Buss--Goldsmith: kernel con $O(k^2)$ aristas~\citep{buss1993} & parametrizado \\
+2000--01 & Weigt--Hartmann: transición de fase en grafos aleatorios; voraz y divide y vencerás~\citep{weigt2000,weigt2001} & voraz / exacto \\
+2005 & Dinur--Safra: NP-difícil aproximar por debajo de $1.3606$~\citep{dinur2005} & dificultad \\
+2005 & Alber--Dorn--Niedermeier: PD sobre descomposiciones, experimentos en planares~\citep{alber2005} & prog.\ dinámica \\
+2008 & Khot--Regev: $2-\varepsilon$ es difícil bajo la conjetura de juegos únicos~\citep{khot2008} & dificultad \\
+2009 & Karakostas: $2-\Theta(1/\sqrt{\log n})$~\citep{karakostas2009} & aproximación \\
+2010 & Chen--Kanj--Xia: $O(1.2738^k+kn)$~\citep{chen2010} & parametrizado \\
+2016 & Akiba--Iwata: \emph{branch \& reduce} práctico~\citep{akiba2016} & ingeniería \\
+2019 & Bannach--Berndt: PD práctica sobre descomposiciones~\citep{bannach2019} & prog.\ dinámica \\
+2019 & PACE 2019: track de \textsc{Vertex Cover} exacto~\citep{dzulfikar2019} & ingeniería \\
+2020 & \textsc{WeGotYouCovered}, ganador del PACE 2019~\citep{hespe2020} & ingeniería \\
+2024 & Veldt: el MIS aleatorio es una $2$-aproximación~\citep{veldt2024} & aleatorizado \\
+\bottomrule
+\end{tabularx}
+\caption{Cronología de los resultados que enmarcan este trabajo.}
+\label{tab:historia}
+\end{table}
+
+\subsection{Descomposiciones en árbol}\label{sec:td}
+\begin{definition}[Descomposición en árbol y ancho de árbol]
+Una descomposición en árbol de $G$ es un árbol $T$ cuyos nodos $t$ llevan \emph{bolsas} $B_t\subseteq V$ tales que (i) toda arista de $G$ está contenida en alguna bolsa y (ii) para cada vértice $v$, los nodos cuyas bolsas contienen a $v$ forman un subárbol conexo de $T$. Su \emph{ancho} es $\max_t|B_t|-1$, y el \emph{ancho de árbol} $\tw(G)$ es el menor ancho posible.
+\end{definition}
+Algunos valores de referencia: $\tw=1$ en bosques con aristas, $2$ en ciclos, $k$ en la cuadrícula $k\times k$, $n-1$ en el grafo completo y $\Theta(\sqrt n)$ como máximo en grafos planares. En los grafos aleatorios con grado medio constante mayor que $1$, el ancho de árbol crece linealmente con $n$. Calcularlo exactamente es NP-difícil~\citep{arnborg1987}, así que en la práctica se usan heurísticas. Nosotros usamos la eliminación por grado mínimo, que da una cota superior del ancho (\cref{sec:dp}).
+
+La propiedad que hace útil la definición es que \emph{toda bolsa interna separa el grafo}. Si se quita $B_t$, los vértices de los distintos subárboles de $T-t$ quedan en componentes distintas. Una solución parcial a cada lado solo interactúa con la otra a través de lo que ocurra dentro de la bolsa.
+
+\subsection{Algoritmos aleatorizados}
+Un algoritmo aleatorizado es \emph{Las Vegas} si siempre responde correctamente y solo su tiempo es aleatorio; es \emph{Monte Carlo} si su tiempo está acotado pero puede responder mal con probabilidad acotada. En MVC conviene precisar qué es ``responder bien''. Los algoritmos que estudiamos devuelven \emph{siempre} una cubierta válida, y el azar solo afecta su \emph{calidad}. Repetir $R$ veces un algoritmo cuya salida $X\ge\tau$ cumple $\mathbb E[X]\le 2\tau$ y quedarse con la mejor es un esquema Monte Carlo. Por la desigualdad de Markov,
+\begin{equation}\label{eq:amplif}
+\Pr\big[\min_{r\le R}X_r\ge (1+\varepsilon)\,2\tau\big]\;\le\;\Big(\tfrac{1}{1+\varepsilon}\Big)^{R},
+\end{equation}
+de modo que la probabilidad de quedar lejos de la garantía cae exponencialmente con el número de repeticiones.

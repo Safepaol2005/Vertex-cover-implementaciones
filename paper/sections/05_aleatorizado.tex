@@ -1,0 +1,45 @@
+\section{Aleatorizado: el independiente maximal de Veldt}\label{sec:rmis}
+
+\subsection{Enfoque}
+Por la \cref{prop:gallai}, encontrar una cubierta pequeña es lo mismo que encontrar un conjunto independiente grande. El algoritmo más simple para construir un independiente \emph{maximal} es recorrer los vértices en algún orden y añadir cada vértice que todavía no tenga un vecino elegido. Si el orden es una permutación aleatoria uniforme, la cubierta resultante, el complemento del independiente, es una $2$-aproximación en esperanza. Veldt lo prueba~\citep{veldt2024}, y observa que la versión no ponderada de su algoritmo coincide con este voraz aleatorio para independientes maximales, conocido desde hace décadas como algoritmo de independientes pero no como aproximación de MVC~\citep{veldt2024}.
+
+\paragraph{¿Por qué así?} El orden aleatorio es lo que protege al algoritmo de las instancias adversarias. Un orden fijo, como el ``grado máximo primero'' del voraz, se puede explotar construyendo la instancia, como en la trampa de Johnson. Un orden uniforme no, porque el adversario no sabe qué vértice se elegirá primero. La versión ponderada muestrea cada vértice con probabilidad proporcional a su peso y pone a todos sus vecinos en la cubierta~\citep{veldt2024}. Veldt señala además que el algoritmo se paraleliza de forma natural en $O(\log n)$ rondas~\citep{veldt2024}.
+
+\paragraph{¿Por qué este y no otro aleatorizado?} Entre los aleatorizados que consideramos al inicio del proyecto, este es el de menor costo: $O(n+m)$ por corrida, sin estructuras de datos dinámicas ni parámetros que ajustar. También es el más polivalente: sirve para la versión ponderada y se paraleliza. Las variantes que muestrean proporcionalmente al grado necesitan mantener una distribución que cambia en cada paso.
+
+\begin{algorithm}[!htbp]
+\caption{\alg{MIS-Aleatorio}$(G, R)$ (Veldt); con $R>1$ es Monte Carlo}\label{alg:rmis}
+\Input{grafo $G$; número de corridas $R$}
+\Output{una cubierta $C$}
+$C^\star\gets V$\;
+\For{$r=1,\dots,R$}{
+  $\pi\gets$ permutación uniforme de $V$ (Fisher--Yates)\;
+  $\mathrm{estado}(v)\gets\textsc{libre}$ para todo $v$;\quad $C\gets\emptyset$\;
+  \ForEach{$v$ en el orden $\pi$}{
+    \If{$\mathrm{estado}(v)=\textsc{libre}$}{
+      $\mathrm{estado}(v)\gets\textsc{independiente}$\;
+      \ForEach{$w\in N(v)$ con $\mathrm{estado}(w)=\textsc{libre}$}{$\mathrm{estado}(w)\gets\textsc{cubierto}$;\quad $C\gets C\cup\{w\}$\;}
+    }
+  }
+  \lIf{$|C|<|C^\star|$}{$C^\star\gets C$}
+}
+\Return $C^\star$\;
+\end{algorithm}
+
+\begin{theorem}[Garantía, Veldt~\citep{veldt2024}]\label{thm:veldt}
+Para una permutación uniforme, la cubierta $C$ de una corrida cumple $\mathbb E\,|C|\le 2\,\tau(G)$. (El resultado del artículo es para la versión ponderada; el caso no ponderado es el que usamos.)
+\end{theorem}
+
+\begin{proposition}[Corrección y complejidad]
+Cada corrida devuelve una cubierta válida en tiempo $O(n+m)$. Con $R$ corridas el tiempo es $O(R(n+m))$, y la probabilidad de que la mejor cubierta supere $2(1+\varepsilon)\tau$ es a lo sumo $(1+\varepsilon)^{-R}$.
+\end{proposition}
+\begin{proof}
+El conjunto $I$ de vértices \textsc{independiente} no tiene aristas internas, porque un vértice solo entra a $I$ si está libre, y está libre solo si ningún vecino entró antes. Es maximal, porque todo vértice fuera de $I$ quedó \textsc{cubierto} por un vecino en $I$. Entonces $C=V\setminus I$ es una cubierta por la \cref{prop:gallai}. Fisher--Yates cuesta $O(n)$; cada vértice se visita una vez y su lista de adyacencia se recorre a lo sumo una vez, lo que suma $O(n+m)$. La cota de probabilidad es \eqref{eq:amplif} con $X_r\ge\tau$ y $\mathbb E[X_r]\le 2\tau$.
+\end{proof}
+
+\begin{example}[Dónde la cota de $2$ es casi justa]
+En el bipartito completo $K_{a,b}$, el primer vértice elegido decide todo. Si cae del lado $A$ (probabilidad $a/(a+b)$), la cubierta es todo $B$, y viceversa. Así $\mathbb E|C|=\frac{a}{a+b}\,b+\frac{b}{a+b}\,a=\frac{2ab}{a+b}$, mientras $\tau=\min(a,b)$. Si $a=b$, el algoritmo encuentra siempre el óptimo; si $b\gg a$, la razón esperada tiende a $2$. En una estrella $K_{1,n-1}$ el centro se elige primero solo con probabilidad $1/n$, y la cubierta esperada es $\frac1n(n-1)+\frac{n-1}{n}\cdot1<2=2\tau$.
+\end{example}
+
+\subsection{Tipos de grafos}
+La garantía vale en \emph{todo} grafo; no depende de la estructura. Es el único de los tres algoritmos con una garantía multiplicativa constante. La contraparte es que no aprovecha ninguna estructura. En grafos dispersos donde el voraz acierta casi siempre (redes viales, grafos con muchas hojas), el MIS aleatorio pierde porque el orden aleatorio elige a menudo hojas cuyo vecino ``debería'' quedar fuera del independiente. Por eso, en la práctica, su valor está en ser \emph{barato y diverso}: repetirlo con semillas distintas da muchas cubiertas razonables y distintas entre sí, y quedarse con la mejor es una forma sencilla de obtener una buena cota superior. Así lo usa el algoritmo híbrido de la \cref{sec:hyvc}.

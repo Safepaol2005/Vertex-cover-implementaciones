@@ -1,0 +1,35 @@
+\section{Casos de prueba}\label{sec:casos}
+
+Para que otros grupos puedan verificar los resultados, todos los casos de prueba son públicos o se generan con un programa incluido en el repositorio y una semilla fija. La \cref{tab:datasets} los resume.
+
+\begin{table}[!htbp]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{3.1cm} r r r >{\raggedright\arraybackslash}X@{}}
+\toprule
+Conjunto & Instancias & $n$ (mín./mediana/máx.) & $m$ (mín./mediana/máx.) & Para qué sirve \\
+\midrule
+PACE 2019, track 1~\citep{pace2019data} & 200 & 153 / 13\,590 / 138\,141 & 625 / 24\,663 / 227\,241 & Benchmark oficial de MVC exacto; permite comparar con el ganador \\
+PACE 2017, track A~\citep{pace2017data} & 200 & 48 / 261 / 3\,706 & 96 / 692 / 419\,877 & Ancho de árbol \emph{conocido}: régimen de la PD \\
+Sintéticas (este trabajo) & 35 & 66 / 1\,000 / 2\,000 & 319 / 3\,032 / 20\,994 & Tipos de grafo controlados: aleatorios, ley de potencias, banda, bipartitos, trampa \\
+\bottomrule
+\end{tabularx}
+\caption{Conjuntos de prueba.}
+\label{tab:datasets}
+\end{table}
+
+\paragraph{PACE 2019.} Son las 200 instancias del track de \textsc{Vertex Cover} exacto del reto PACE~2019, publicadas en Zenodo~\citep{pace2019data}. Las impares fueron públicas durante el reto y las pares se usaron para la evaluación final. Según los organizadores, provienen de colecciones públicas de grafos y de reducciones desde otros problemas difíciles~\citep{pace2019data,dzulfikar2019}, y como regla general un número mayor indica una instancia más difícil. Verificamos que el archivo descargado tiene la suma MD5 publicada. Este es el conjunto en el que se evaluó a \textsc{WeGotYouCovered}, cuyo informe publica el tiempo de su algoritmo completo en cada una de las 200 instancias y el tamaño de la cubierta mínima de las 100 públicas~\citep{hespe2020}. Esos tiempos se midieron en otro hardware y con un límite de 30 minutos, así que la comparación de tiempos es solo orientativa. La comparación de \emph{cuántas instancias se resuelven en un tiempo dado} es más robusta.
+
+\paragraph{PACE 2017.} Son las 200 instancias del track exacto de \emph{treewidth} del PACE~2017, con licencia CC0~\citep{pace2017data}. El repositorio incluye una descomposición óptima de cada una, así que conocemos su ancho de árbol exacto: va de 6 a 908 y tiene mediana 11, y 148 de las 200 tienen ancho $\le 20$. Con estas instancias podemos medir dos cosas: qué tan lejos queda la heurística de grado mínimo del ancho verdadero y cuándo la PD es la mejor opción.
+
+\paragraph{Sintéticas.} El programa \texttt{gen} del repositorio genera, en formato PACE, cinco familias con semillas fijas:
+\begin{itemize}
+  \item \textbf{Erdős--Rényi} $G(1000,c/999)$ con grado medio $c\in\{1,2,3,4,6\}$, 3 semillas. Es el régimen estudiado por Weigt y Hartmann, con el umbral $c=e$~\citep{weigt2000}.
+  \item \textbf{Barabási--Albert} con $n=2000$ y $m\in\{2,3,5\}$, 2 semillas: ley de potencias, como en muchas redes reales.
+  \item \textbf{Banda} con $n=1000$: arista entre $i$ y $j$ con $|i-j|\le b$ y probabilidad $0.4$, para $b\in\{8,12,16\}$, 2 semillas. El ancho de árbol es a lo sumo $b$ y el grafo no es cordal, así que la PD es necesaria.
+  \item \textbf{Bipartitos aleatorios} con $500+500$ vértices y grado medio $c\in\{3,6\}$, 2 semillas: polinomiales por el teorema de Kőnig, pero difíciles para la ramificación.
+  \item \textbf{Trampa de Johnson} con $k\in\{20,40,80,160\}$: el peor caso del voraz (\cref{sec:voraz}).
+\end{itemize}
+
+\paragraph{Óptimo de referencia.} Para las 100 instancias públicas del PACE~2019 usamos el tamaño de la cubierta mínima publicado por \textsc{WeGotYouCovered}~\citep{hespe2020}. En las demás usamos el valor certificado por cualquiera de nuestros algoritmos exactos (\alg{PD-TD}, \alg{DyV-WH} o \hyvc). Si ninguno termina, usamos el solucionador de programación entera CP-SAT de OR-Tools con 60\,s y 2 hilos, y marcamos la instancia como \emph{sin óptimo certificado} si tampoco lo prueba.
+
+\paragraph{Protocolo.} Cada algoritmo corre en un solo hilo con un límite de 10\,s por instancia, dos procesos a la vez en una máquina de 2 núcleos. El voraz y el MIS aleatorio no necesitan límite. Para la PD, ``no termina'' significa que el ancho supera $22$ o que la tabla supera $2^{27}$ celdas (límite de memoria). Cada cubierta devuelta se verifica antes de registrarla.

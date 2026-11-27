@@ -1,0 +1,14 @@
+\section{Código y reproducibilidad}\label{app:codigo}
+Todo el código está en C++17, sin dependencias externas, y se compila con \texttt{make}. Los archivos principales son:
+\begin{itemize}
+  \item \texttt{src/greedy\_wh.hpp}: \alg{Voraz-WH} (\cref{alg:voraz}).
+  \item \texttt{src/dp\_td.hpp}: eliminación por grado mínimo y \alg{PD-TD} (\cref{alg:dp}).
+  \item \texttt{src/random\_mis.hpp}: \alg{MIS-Aleatorio} (\cref{alg:rmis}).
+  \item \texttt{src/divide\_conquer.hpp}: \alg{DyV-WH} (\cref{alg:dc}).
+  \item \texttt{src/reductions.hpp}, \texttt{src/bounds.hpp}, \texttt{src/hybrid.hpp}: reglas R0--R5, cotas inferiores y \hyvc{} (\cref{alg:hyvc,alg:resolver}).
+  \item \texttt{src/main.cpp}: el ejecutable \texttt{vcsolve}, que lee los formatos PACE y DIMACS. Se usa como\\ \texttt{vcsolve <alg> <grafo> [--time T] [--runs R] [--no-dp] \dots}
+  \item \texttt{src/gen.cpp}: generador de las instancias sintéticas.
+  \item \texttt{tests/}: comparación con fuerza bruta (2000 grafos de hasta 16 vértices) y con CP-SAT.
+  \item \texttt{bench/}: scripts de los experimentos y de las tablas y figuras de este documento.
+\end{itemize}
+Los resultados crudos de cada ejecución están en \texttt{results/}.

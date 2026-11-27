@@ -1,0 +1,15 @@
+\section{Conclusiones}\label{sec:conclusiones}
+
+Estudiamos tres maneras clásicas de atacar \textsc{Minimum Vertex Cover}, cada una con su propio tipo de información sobre el grafo. El voraz de grado máximo de Weigt y Hartmann usa una regla local, cuesta $O(n+m)$ y es la mejor heurística en grafos naturales, con un 2.7--3.1\,\% por encima del óptimo; un adversario lo lleva a $4.3$ veces el óptimo en la trampa de Johnson. La programación dinámica sobre descomposiciones en árbol usa la estructura global y es exacta en $O(2^w\,w\,n)$, pero solo es práctica si la descomposición disponible es angosta. La heurística de grado mínimo sobreestima el ancho un 31\,\% en promedio, y eso limita su alcance. El MIS aleatorio de Veldt no usa información para decidir el orden y es una $2$-aproximación en esperanza en tiempo lineal. En la práctica es la peor de las tres heurísticas en promedio, pero la única que la trampa de Johnson no engaña.
+
+A partir de esa comparación construimos \hyvc. Usa los tres algoritmos como piezas (cotas superiores, regla de ramificación y resolución exacta de componentes angostas) y los combina con reglas de reducción, división en componentes y la cota LP de Nemhauser y Trotter. Siempre devuelve una cubierta válida; cuando termina, la cubierta es óptima, y en el peor caso corre en $O^*(1.4656^n)$, frente a $O^*(1.618^n)$ del divide y vencerás. En 10\,s, \hyvc{} resolvió 30, 198 y 25 instancias de los conjuntos PACE~2019, PACE~2017 y sintético, frente a 13, 137 y 8 de la PD y 13, 65 y 5 del divide y vencerás. Toda instancia resuelta por la PD o por el divide y vencerás también la resuelve \hyvc, que además resuelve los grafos aleatorios con $c\le 3$, los de ley de potencias con $m\le 3$ y los bipartitos.
+
+El estado del arte sigue lejos. En el PACE~2019, \textsc{WeGotYouCovered} resuelve 155 instancias en el mismo tiempo, y todas las que \hyvc{} resuelve están entre ellas. El análisis por instancia ubica la diferencia en dos piezas que ninguno de los tres algoritmos estudiados aporta: reglas de reducción para vértices de grado 3 y una cota inferior fuerte para núcleos densos sin estructura. La ablación confirma que la mayor parte de la ganancia de \hyvc{} sobre los algoritmos base viene de las reducciones y, en grafos angostos, de la PD. La división en componentes y la cota Monte Carlo no tuvieron un efecto medible en estas instancias.
+
+\paragraph{Trabajo futuro.}
+\begin{enumerate}
+  \item Añadir las reglas de grado 3 que usa el estado del arte~\citep{akiba2016}.
+  \item Probar cotas inferiores por coloración del complemento para los núcleos densos.
+  \item Incorporar una búsqueda local para mejorar la respuesta \emph{anytime}.
+  \item Usar mejores descomposiciones (por ejemplo, las de los solucionadores del PACE~2017) para ampliar el régimen de la PD.
+\end{enumerate}

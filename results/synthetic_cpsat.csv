@@ -1,0 +1,11 @@
+file,cpsat_size,cpsat_optimal,cpsat_bound,time_s
+data/synthetic/ba2000_m5_s1.gr,1148,False,333,30.17
+data/synthetic/ba2000_m5_s2.gr,1169,False,343,30.0
+data/synthetic/band1000_b16_s1.gr,751,False,714,30.0
+data/synthetic/band1000_b16_s2.gr,757,False,717,30.0
+data/synthetic/er1000_c4_s1.gr,534,False,103,30.0
+data/synthetic/er1000_c4_s2.gr,527,False,109,30.0
+data/synthetic/er1000_c4_s3.gr,530,False,115,30.0
+data/synthetic/er1000_c6_s1.gr,600,False,79,30.0
+data/synthetic/er1000_c6_s2.gr,604,False,64,30.0
+data/synthetic/er1000_c6_s3.gr,597,False,77,30.0

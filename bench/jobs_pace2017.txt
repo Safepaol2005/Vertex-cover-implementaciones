@@ -1,0 +1,1200 @@
+greedy data/pace2017/ex001.gr 10
+rmis data/pace2017/ex001.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex001.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex001.gr 10
+dc data/pace2017/ex001.gr 10
+hybrid data/pace2017/ex001.gr 10
+greedy data/pace2017/ex002.gr 10
+rmis data/pace2017/ex002.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex002.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex002.gr 10
+dc data/pace2017/ex002.gr 10
+hybrid data/pace2017/ex002.gr 10
+greedy data/pace2017/ex003.gr 10
+rmis data/pace2017/ex003.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex003.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex003.gr 10
+dc data/pace2017/ex003.gr 10
+hybrid data/pace2017/ex003.gr 10
+greedy data/pace2017/ex004.gr 10
+rmis data/pace2017/ex004.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex004.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex004.gr 10
+dc data/pace2017/ex004.gr 10
+hybrid data/pace2017/ex004.gr 10
+greedy data/pace2017/ex005.gr 10
+rmis data/pace2017/ex005.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex005.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex005.gr 10
+dc data/pace2017/ex005.gr 10
+hybrid data/pace2017/ex005.gr 10
+greedy data/pace2017/ex006.gr 10
+rmis data/pace2017/ex006.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex006.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex006.gr 10
+dc data/pace2017/ex006.gr 10
+hybrid data/pace2017/ex006.gr 10
+greedy data/pace2017/ex007.gr 10
+rmis data/pace2017/ex007.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex007.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex007.gr 10
+dc data/pace2017/ex007.gr 10
+hybrid data/pace2017/ex007.gr 10
+greedy data/pace2017/ex008.gr 10
+rmis data/pace2017/ex008.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex008.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex008.gr 10
+dc data/pace2017/ex008.gr 10
+hybrid data/pace2017/ex008.gr 10
+greedy data/pace2017/ex009.gr 10
+rmis data/pace2017/ex009.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex009.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex009.gr 10
+dc data/pace2017/ex009.gr 10
+hybrid data/pace2017/ex009.gr 10
+greedy data/pace2017/ex010.gr 10
+rmis data/pace2017/ex010.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex010.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex010.gr 10
+dc data/pace2017/ex010.gr 10
+hybrid data/pace2017/ex010.gr 10
+greedy data/pace2017/ex011.gr 10
+rmis data/pace2017/ex011.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex011.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex011.gr 10
+dc data/pace2017/ex011.gr 10
+hybrid data/pace2017/ex011.gr 10
+greedy data/pace2017/ex012.gr 10
+rmis data/pace2017/ex012.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex012.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex012.gr 10
+dc data/pace2017/ex012.gr 10
+hybrid data/pace2017/ex012.gr 10
+greedy data/pace2017/ex013.gr 10
+rmis data/pace2017/ex013.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex013.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex013.gr 10
+dc data/pace2017/ex013.gr 10
+hybrid data/pace2017/ex013.gr 10
+greedy data/pace2017/ex014.gr 10
+rmis data/pace2017/ex014.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex014.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex014.gr 10
+dc data/pace2017/ex014.gr 10
+hybrid data/pace2017/ex014.gr 10
+greedy data/pace2017/ex015.gr 10
+rmis data/pace2017/ex015.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex015.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex015.gr 10
+dc data/pace2017/ex015.gr 10
+hybrid data/pace2017/ex015.gr 10
+greedy data/pace2017/ex016.gr 10
+rmis data/pace2017/ex016.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex016.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex016.gr 10
+dc data/pace2017/ex016.gr 10
+hybrid data/pace2017/ex016.gr 10
+greedy data/pace2017/ex017.gr 10
+rmis data/pace2017/ex017.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex017.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex017.gr 10
+dc data/pace2017/ex017.gr 10
+hybrid data/pace2017/ex017.gr 10
+greedy data/pace2017/ex018.gr 10
+rmis data/pace2017/ex018.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex018.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex018.gr 10
+dc data/pace2017/ex018.gr 10
+hybrid data/pace2017/ex018.gr 10
+greedy data/pace2017/ex019.gr 10
+rmis data/pace2017/ex019.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex019.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex019.gr 10
+dc data/pace2017/ex019.gr 10
+hybrid data/pace2017/ex019.gr 10
+greedy data/pace2017/ex020.gr 10
+rmis data/pace2017/ex020.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex020.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex020.gr 10
+dc data/pace2017/ex020.gr 10
+hybrid data/pace2017/ex020.gr 10
+greedy data/pace2017/ex021.gr 10
+rmis data/pace2017/ex021.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex021.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex021.gr 10
+dc data/pace2017/ex021.gr 10
+hybrid data/pace2017/ex021.gr 10
+greedy data/pace2017/ex022.gr 10
+rmis data/pace2017/ex022.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex022.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex022.gr 10
+dc data/pace2017/ex022.gr 10
+hybrid data/pace2017/ex022.gr 10
+greedy data/pace2017/ex023.gr 10
+rmis data/pace2017/ex023.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex023.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex023.gr 10
+dc data/pace2017/ex023.gr 10
+hybrid data/pace2017/ex023.gr 10
+greedy data/pace2017/ex024.gr 10
+rmis data/pace2017/ex024.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex024.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex024.gr 10
+dc data/pace2017/ex024.gr 10
+hybrid data/pace2017/ex024.gr 10
+greedy data/pace2017/ex025.gr 10
+rmis data/pace2017/ex025.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex025.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex025.gr 10
+dc data/pace2017/ex025.gr 10
+hybrid data/pace2017/ex025.gr 10
+greedy data/pace2017/ex026.gr 10
+rmis data/pace2017/ex026.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex026.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex026.gr 10
+dc data/pace2017/ex026.gr 10
+hybrid data/pace2017/ex026.gr 10
+greedy data/pace2017/ex027.gr 10
+rmis data/pace2017/ex027.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex027.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex027.gr 10
+dc data/pace2017/ex027.gr 10
+hybrid data/pace2017/ex027.gr 10
+greedy data/pace2017/ex028.gr 10
+rmis data/pace2017/ex028.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex028.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex028.gr 10
+dc data/pace2017/ex028.gr 10
+hybrid data/pace2017/ex028.gr 10
+greedy data/pace2017/ex029.gr 10
+rmis data/pace2017/ex029.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex029.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex029.gr 10
+dc data/pace2017/ex029.gr 10
+hybrid data/pace2017/ex029.gr 10
+greedy data/pace2017/ex030.gr 10
+rmis data/pace2017/ex030.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex030.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex030.gr 10
+dc data/pace2017/ex030.gr 10
+hybrid data/pace2017/ex030.gr 10
+greedy data/pace2017/ex031.gr 10
+rmis data/pace2017/ex031.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex031.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex031.gr 10
+dc data/pace2017/ex031.gr 10
+hybrid data/pace2017/ex031.gr 10
+greedy data/pace2017/ex032.gr 10
+rmis data/pace2017/ex032.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex032.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex032.gr 10
+dc data/pace2017/ex032.gr 10
+hybrid data/pace2017/ex032.gr 10
+greedy data/pace2017/ex033.gr 10
+rmis data/pace2017/ex033.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex033.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex033.gr 10
+dc data/pace2017/ex033.gr 10
+hybrid data/pace2017/ex033.gr 10
+greedy data/pace2017/ex034.gr 10
+rmis data/pace2017/ex034.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex034.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex034.gr 10
+dc data/pace2017/ex034.gr 10
+hybrid data/pace2017/ex034.gr 10
+greedy data/pace2017/ex035.gr 10
+rmis data/pace2017/ex035.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex035.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex035.gr 10
+dc data/pace2017/ex035.gr 10
+hybrid data/pace2017/ex035.gr 10
+greedy data/pace2017/ex036.gr 10
+rmis data/pace2017/ex036.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex036.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex036.gr 10
+dc data/pace2017/ex036.gr 10
+hybrid data/pace2017/ex036.gr 10
+greedy data/pace2017/ex037.gr 10
+rmis data/pace2017/ex037.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex037.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex037.gr 10
+dc data/pace2017/ex037.gr 10
+hybrid data/pace2017/ex037.gr 10
+greedy data/pace2017/ex038.gr 10
+rmis data/pace2017/ex038.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex038.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex038.gr 10
+dc data/pace2017/ex038.gr 10
+hybrid data/pace2017/ex038.gr 10
+greedy data/pace2017/ex039.gr 10
+rmis data/pace2017/ex039.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex039.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex039.gr 10
+dc data/pace2017/ex039.gr 10
+hybrid data/pace2017/ex039.gr 10
+greedy data/pace2017/ex040.gr 10
+rmis data/pace2017/ex040.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex040.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex040.gr 10
+dc data/pace2017/ex040.gr 10
+hybrid data/pace2017/ex040.gr 10
+greedy data/pace2017/ex041.gr 10
+rmis data/pace2017/ex041.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex041.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex041.gr 10
+dc data/pace2017/ex041.gr 10
+hybrid data/pace2017/ex041.gr 10
+greedy data/pace2017/ex042.gr 10
+rmis data/pace2017/ex042.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex042.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex042.gr 10
+dc data/pace2017/ex042.gr 10
+hybrid data/pace2017/ex042.gr 10
+greedy data/pace2017/ex043.gr 10
+rmis data/pace2017/ex043.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex043.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex043.gr 10
+dc data/pace2017/ex043.gr 10
+hybrid data/pace2017/ex043.gr 10
+greedy data/pace2017/ex044.gr 10
+rmis data/pace2017/ex044.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex044.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex044.gr 10
+dc data/pace2017/ex044.gr 10
+hybrid data/pace2017/ex044.gr 10
+greedy data/pace2017/ex045.gr 10
+rmis data/pace2017/ex045.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex045.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex045.gr 10
+dc data/pace2017/ex045.gr 10
+hybrid data/pace2017/ex045.gr 10
+greedy data/pace2017/ex046.gr 10
+rmis data/pace2017/ex046.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex046.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex046.gr 10
+dc data/pace2017/ex046.gr 10
+hybrid data/pace2017/ex046.gr 10
+greedy data/pace2017/ex047.gr 10
+rmis data/pace2017/ex047.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex047.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex047.gr 10
+dc data/pace2017/ex047.gr 10
+hybrid data/pace2017/ex047.gr 10
+greedy data/pace2017/ex048.gr 10
+rmis data/pace2017/ex048.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex048.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex048.gr 10
+dc data/pace2017/ex048.gr 10
+hybrid data/pace2017/ex048.gr 10
+greedy data/pace2017/ex049.gr 10
+rmis data/pace2017/ex049.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex049.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex049.gr 10
+dc data/pace2017/ex049.gr 10
+hybrid data/pace2017/ex049.gr 10
+greedy data/pace2017/ex050.gr 10
+rmis data/pace2017/ex050.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex050.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex050.gr 10
+dc data/pace2017/ex050.gr 10
+hybrid data/pace2017/ex050.gr 10
+greedy data/pace2017/ex051.gr 10
+rmis data/pace2017/ex051.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex051.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex051.gr 10
+dc data/pace2017/ex051.gr 10
+hybrid data/pace2017/ex051.gr 10
+greedy data/pace2017/ex052.gr 10
+rmis data/pace2017/ex052.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex052.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex052.gr 10
+dc data/pace2017/ex052.gr 10
+hybrid data/pace2017/ex052.gr 10
+greedy data/pace2017/ex053.gr 10
+rmis data/pace2017/ex053.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex053.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex053.gr 10
+dc data/pace2017/ex053.gr 10
+hybrid data/pace2017/ex053.gr 10
+greedy data/pace2017/ex054.gr 10
+rmis data/pace2017/ex054.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex054.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex054.gr 10
+dc data/pace2017/ex054.gr 10
+hybrid data/pace2017/ex054.gr 10
+greedy data/pace2017/ex055.gr 10
+rmis data/pace2017/ex055.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex055.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex055.gr 10
+dc data/pace2017/ex055.gr 10
+hybrid data/pace2017/ex055.gr 10
+greedy data/pace2017/ex056.gr 10
+rmis data/pace2017/ex056.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex056.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex056.gr 10
+dc data/pace2017/ex056.gr 10
+hybrid data/pace2017/ex056.gr 10
+greedy data/pace2017/ex057.gr 10
+rmis data/pace2017/ex057.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex057.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex057.gr 10
+dc data/pace2017/ex057.gr 10
+hybrid data/pace2017/ex057.gr 10
+greedy data/pace2017/ex058.gr 10
+rmis data/pace2017/ex058.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex058.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex058.gr 10
+dc data/pace2017/ex058.gr 10
+hybrid data/pace2017/ex058.gr 10
+greedy data/pace2017/ex059.gr 10
+rmis data/pace2017/ex059.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex059.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex059.gr 10
+dc data/pace2017/ex059.gr 10
+hybrid data/pace2017/ex059.gr 10
+greedy data/pace2017/ex060.gr 10
+rmis data/pace2017/ex060.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex060.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex060.gr 10
+dc data/pace2017/ex060.gr 10
+hybrid data/pace2017/ex060.gr 10
+greedy data/pace2017/ex061.gr 10
+rmis data/pace2017/ex061.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex061.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex061.gr 10
+dc data/pace2017/ex061.gr 10
+hybrid data/pace2017/ex061.gr 10
+greedy data/pace2017/ex062.gr 10
+rmis data/pace2017/ex062.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex062.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex062.gr 10
+dc data/pace2017/ex062.gr 10
+hybrid data/pace2017/ex062.gr 10
+greedy data/pace2017/ex063.gr 10
+rmis data/pace2017/ex063.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex063.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex063.gr 10
+dc data/pace2017/ex063.gr 10
+hybrid data/pace2017/ex063.gr 10
+greedy data/pace2017/ex064.gr 10
+rmis data/pace2017/ex064.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex064.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex064.gr 10
+dc data/pace2017/ex064.gr 10
+hybrid data/pace2017/ex064.gr 10
+greedy data/pace2017/ex065.gr 10
+rmis data/pace2017/ex065.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex065.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex065.gr 10
+dc data/pace2017/ex065.gr 10
+hybrid data/pace2017/ex065.gr 10
+greedy data/pace2017/ex066.gr 10
+rmis data/pace2017/ex066.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex066.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex066.gr 10
+dc data/pace2017/ex066.gr 10
+hybrid data/pace2017/ex066.gr 10
+greedy data/pace2017/ex067.gr 10
+rmis data/pace2017/ex067.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex067.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex067.gr 10
+dc data/pace2017/ex067.gr 10
+hybrid data/pace2017/ex067.gr 10
+greedy data/pace2017/ex068.gr 10
+rmis data/pace2017/ex068.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex068.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex068.gr 10
+dc data/pace2017/ex068.gr 10
+hybrid data/pace2017/ex068.gr 10
+greedy data/pace2017/ex069.gr 10
+rmis data/pace2017/ex069.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex069.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex069.gr 10
+dc data/pace2017/ex069.gr 10
+hybrid data/pace2017/ex069.gr 10
+greedy data/pace2017/ex070.gr 10
+rmis data/pace2017/ex070.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex070.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex070.gr 10
+dc data/pace2017/ex070.gr 10
+hybrid data/pace2017/ex070.gr 10
+greedy data/pace2017/ex071.gr 10
+rmis data/pace2017/ex071.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex071.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex071.gr 10
+dc data/pace2017/ex071.gr 10
+hybrid data/pace2017/ex071.gr 10
+greedy data/pace2017/ex072.gr 10
+rmis data/pace2017/ex072.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex072.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex072.gr 10
+dc data/pace2017/ex072.gr 10
+hybrid data/pace2017/ex072.gr 10
+greedy data/pace2017/ex073.gr 10
+rmis data/pace2017/ex073.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex073.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex073.gr 10
+dc data/pace2017/ex073.gr 10
+hybrid data/pace2017/ex073.gr 10
+greedy data/pace2017/ex074.gr 10
+rmis data/pace2017/ex074.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex074.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex074.gr 10
+dc data/pace2017/ex074.gr 10
+hybrid data/pace2017/ex074.gr 10
+greedy data/pace2017/ex075.gr 10
+rmis data/pace2017/ex075.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex075.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex075.gr 10
+dc data/pace2017/ex075.gr 10
+hybrid data/pace2017/ex075.gr 10
+greedy data/pace2017/ex076.gr 10
+rmis data/pace2017/ex076.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex076.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex076.gr 10
+dc data/pace2017/ex076.gr 10
+hybrid data/pace2017/ex076.gr 10
+greedy data/pace2017/ex077.gr 10
+rmis data/pace2017/ex077.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex077.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex077.gr 10
+dc data/pace2017/ex077.gr 10
+hybrid data/pace2017/ex077.gr 10
+greedy data/pace2017/ex078.gr 10
+rmis data/pace2017/ex078.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex078.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex078.gr 10
+dc data/pace2017/ex078.gr 10
+hybrid data/pace2017/ex078.gr 10
+greedy data/pace2017/ex079.gr 10
+rmis data/pace2017/ex079.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex079.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex079.gr 10
+dc data/pace2017/ex079.gr 10
+hybrid data/pace2017/ex079.gr 10
+greedy data/pace2017/ex080.gr 10
+rmis data/pace2017/ex080.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex080.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex080.gr 10
+dc data/pace2017/ex080.gr 10
+hybrid data/pace2017/ex080.gr 10
+greedy data/pace2017/ex081.gr 10
+rmis data/pace2017/ex081.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex081.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex081.gr 10
+dc data/pace2017/ex081.gr 10
+hybrid data/pace2017/ex081.gr 10
+greedy data/pace2017/ex082.gr 10
+rmis data/pace2017/ex082.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex082.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex082.gr 10
+dc data/pace2017/ex082.gr 10
+hybrid data/pace2017/ex082.gr 10
+greedy data/pace2017/ex083.gr 10
+rmis data/pace2017/ex083.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex083.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex083.gr 10
+dc data/pace2017/ex083.gr 10
+hybrid data/pace2017/ex083.gr 10
+greedy data/pace2017/ex084.gr 10
+rmis data/pace2017/ex084.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex084.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex084.gr 10
+dc data/pace2017/ex084.gr 10
+hybrid data/pace2017/ex084.gr 10
+greedy data/pace2017/ex085.gr 10
+rmis data/pace2017/ex085.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex085.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex085.gr 10
+dc data/pace2017/ex085.gr 10
+hybrid data/pace2017/ex085.gr 10
+greedy data/pace2017/ex086.gr 10
+rmis data/pace2017/ex086.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex086.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex086.gr 10
+dc data/pace2017/ex086.gr 10
+hybrid data/pace2017/ex086.gr 10
+greedy data/pace2017/ex087.gr 10
+rmis data/pace2017/ex087.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex087.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex087.gr 10
+dc data/pace2017/ex087.gr 10
+hybrid data/pace2017/ex087.gr 10
+greedy data/pace2017/ex088.gr 10
+rmis data/pace2017/ex088.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex088.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex088.gr 10
+dc data/pace2017/ex088.gr 10
+hybrid data/pace2017/ex088.gr 10
+greedy data/pace2017/ex089.gr 10
+rmis data/pace2017/ex089.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex089.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex089.gr 10
+dc data/pace2017/ex089.gr 10
+hybrid data/pace2017/ex089.gr 10
+greedy data/pace2017/ex090.gr 10
+rmis data/pace2017/ex090.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex090.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex090.gr 10
+dc data/pace2017/ex090.gr 10
+hybrid data/pace2017/ex090.gr 10
+greedy data/pace2017/ex091.gr 10
+rmis data/pace2017/ex091.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex091.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex091.gr 10
+dc data/pace2017/ex091.gr 10
+hybrid data/pace2017/ex091.gr 10
+greedy data/pace2017/ex092.gr 10
+rmis data/pace2017/ex092.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex092.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex092.gr 10
+dc data/pace2017/ex092.gr 10
+hybrid data/pace2017/ex092.gr 10
+greedy data/pace2017/ex093.gr 10
+rmis data/pace2017/ex093.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex093.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex093.gr 10
+dc data/pace2017/ex093.gr 10
+hybrid data/pace2017/ex093.gr 10
+greedy data/pace2017/ex094.gr 10
+rmis data/pace2017/ex094.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex094.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex094.gr 10
+dc data/pace2017/ex094.gr 10
+hybrid data/pace2017/ex094.gr 10
+greedy data/pace2017/ex095.gr 10
+rmis data/pace2017/ex095.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex095.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex095.gr 10
+dc data/pace2017/ex095.gr 10
+hybrid data/pace2017/ex095.gr 10
+greedy data/pace2017/ex096.gr 10
+rmis data/pace2017/ex096.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex096.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex096.gr 10
+dc data/pace2017/ex096.gr 10
+hybrid data/pace2017/ex096.gr 10
+greedy data/pace2017/ex097.gr 10
+rmis data/pace2017/ex097.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex097.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex097.gr 10
+dc data/pace2017/ex097.gr 10
+hybrid data/pace2017/ex097.gr 10
+greedy data/pace2017/ex098.gr 10
+rmis data/pace2017/ex098.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex098.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex098.gr 10
+dc data/pace2017/ex098.gr 10
+hybrid data/pace2017/ex098.gr 10
+greedy data/pace2017/ex099.gr 10
+rmis data/pace2017/ex099.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex099.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex099.gr 10
+dc data/pace2017/ex099.gr 10
+hybrid data/pace2017/ex099.gr 10
+greedy data/pace2017/ex100.gr 10
+rmis data/pace2017/ex100.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex100.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex100.gr 10
+dc data/pace2017/ex100.gr 10
+hybrid data/pace2017/ex100.gr 10
+greedy data/pace2017/ex101.gr 10
+rmis data/pace2017/ex101.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex101.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex101.gr 10
+dc data/pace2017/ex101.gr 10
+hybrid data/pace2017/ex101.gr 10
+greedy data/pace2017/ex102.gr 10
+rmis data/pace2017/ex102.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex102.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex102.gr 10
+dc data/pace2017/ex102.gr 10
+hybrid data/pace2017/ex102.gr 10
+greedy data/pace2017/ex103.gr 10
+rmis data/pace2017/ex103.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex103.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex103.gr 10
+dc data/pace2017/ex103.gr 10
+hybrid data/pace2017/ex103.gr 10
+greedy data/pace2017/ex104.gr 10
+rmis data/pace2017/ex104.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex104.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex104.gr 10
+dc data/pace2017/ex104.gr 10
+hybrid data/pace2017/ex104.gr 10
+greedy data/pace2017/ex105.gr 10
+rmis data/pace2017/ex105.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex105.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex105.gr 10
+dc data/pace2017/ex105.gr 10
+hybrid data/pace2017/ex105.gr 10
+greedy data/pace2017/ex106.gr 10
+rmis data/pace2017/ex106.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex106.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex106.gr 10
+dc data/pace2017/ex106.gr 10
+hybrid data/pace2017/ex106.gr 10
+greedy data/pace2017/ex107.gr 10
+rmis data/pace2017/ex107.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex107.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex107.gr 10
+dc data/pace2017/ex107.gr 10
+hybrid data/pace2017/ex107.gr 10
+greedy data/pace2017/ex108.gr 10
+rmis data/pace2017/ex108.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex108.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex108.gr 10
+dc data/pace2017/ex108.gr 10
+hybrid data/pace2017/ex108.gr 10
+greedy data/pace2017/ex109.gr 10
+rmis data/pace2017/ex109.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex109.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex109.gr 10
+dc data/pace2017/ex109.gr 10
+hybrid data/pace2017/ex109.gr 10
+greedy data/pace2017/ex110.gr 10
+rmis data/pace2017/ex110.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex110.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex110.gr 10
+dc data/pace2017/ex110.gr 10
+hybrid data/pace2017/ex110.gr 10
+greedy data/pace2017/ex111.gr 10
+rmis data/pace2017/ex111.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex111.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex111.gr 10
+dc data/pace2017/ex111.gr 10
+hybrid data/pace2017/ex111.gr 10
+greedy data/pace2017/ex112.gr 10
+rmis data/pace2017/ex112.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex112.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex112.gr 10
+dc data/pace2017/ex112.gr 10
+hybrid data/pace2017/ex112.gr 10
+greedy data/pace2017/ex113.gr 10
+rmis data/pace2017/ex113.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex113.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex113.gr 10
+dc data/pace2017/ex113.gr 10
+hybrid data/pace2017/ex113.gr 10
+greedy data/pace2017/ex114.gr 10
+rmis data/pace2017/ex114.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex114.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex114.gr 10
+dc data/pace2017/ex114.gr 10
+hybrid data/pace2017/ex114.gr 10
+greedy data/pace2017/ex115.gr 10
+rmis data/pace2017/ex115.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex115.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex115.gr 10
+dc data/pace2017/ex115.gr 10
+hybrid data/pace2017/ex115.gr 10
+greedy data/pace2017/ex116.gr 10
+rmis data/pace2017/ex116.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex116.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex116.gr 10
+dc data/pace2017/ex116.gr 10
+hybrid data/pace2017/ex116.gr 10
+greedy data/pace2017/ex117.gr 10
+rmis data/pace2017/ex117.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex117.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex117.gr 10
+dc data/pace2017/ex117.gr 10
+hybrid data/pace2017/ex117.gr 10
+greedy data/pace2017/ex118.gr 10
+rmis data/pace2017/ex118.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex118.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex118.gr 10
+dc data/pace2017/ex118.gr 10
+hybrid data/pace2017/ex118.gr 10
+greedy data/pace2017/ex119.gr 10
+rmis data/pace2017/ex119.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex119.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex119.gr 10
+dc data/pace2017/ex119.gr 10
+hybrid data/pace2017/ex119.gr 10
+greedy data/pace2017/ex120.gr 10
+rmis data/pace2017/ex120.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex120.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex120.gr 10
+dc data/pace2017/ex120.gr 10
+hybrid data/pace2017/ex120.gr 10
+greedy data/pace2017/ex121.gr 10
+rmis data/pace2017/ex121.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex121.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex121.gr 10
+dc data/pace2017/ex121.gr 10
+hybrid data/pace2017/ex121.gr 10
+greedy data/pace2017/ex122.gr 10
+rmis data/pace2017/ex122.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex122.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex122.gr 10
+dc data/pace2017/ex122.gr 10
+hybrid data/pace2017/ex122.gr 10
+greedy data/pace2017/ex123.gr 10
+rmis data/pace2017/ex123.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex123.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex123.gr 10
+dc data/pace2017/ex123.gr 10
+hybrid data/pace2017/ex123.gr 10
+greedy data/pace2017/ex124.gr 10
+rmis data/pace2017/ex124.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex124.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex124.gr 10
+dc data/pace2017/ex124.gr 10
+hybrid data/pace2017/ex124.gr 10
+greedy data/pace2017/ex125.gr 10
+rmis data/pace2017/ex125.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex125.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex125.gr 10
+dc data/pace2017/ex125.gr 10
+hybrid data/pace2017/ex125.gr 10
+greedy data/pace2017/ex126.gr 10
+rmis data/pace2017/ex126.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex126.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex126.gr 10
+dc data/pace2017/ex126.gr 10
+hybrid data/pace2017/ex126.gr 10
+greedy data/pace2017/ex127.gr 10
+rmis data/pace2017/ex127.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex127.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex127.gr 10
+dc data/pace2017/ex127.gr 10
+hybrid data/pace2017/ex127.gr 10
+greedy data/pace2017/ex128.gr 10
+rmis data/pace2017/ex128.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex128.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex128.gr 10
+dc data/pace2017/ex128.gr 10
+hybrid data/pace2017/ex128.gr 10
+greedy data/pace2017/ex129.gr 10
+rmis data/pace2017/ex129.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex129.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex129.gr 10
+dc data/pace2017/ex129.gr 10
+hybrid data/pace2017/ex129.gr 10
+greedy data/pace2017/ex130.gr 10
+rmis data/pace2017/ex130.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex130.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex130.gr 10
+dc data/pace2017/ex130.gr 10
+hybrid data/pace2017/ex130.gr 10
+greedy data/pace2017/ex131.gr 10
+rmis data/pace2017/ex131.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex131.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex131.gr 10
+dc data/pace2017/ex131.gr 10
+hybrid data/pace2017/ex131.gr 10
+greedy data/pace2017/ex132.gr 10
+rmis data/pace2017/ex132.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex132.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex132.gr 10
+dc data/pace2017/ex132.gr 10
+hybrid data/pace2017/ex132.gr 10
+greedy data/pace2017/ex133.gr 10
+rmis data/pace2017/ex133.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex133.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex133.gr 10
+dc data/pace2017/ex133.gr 10
+hybrid data/pace2017/ex133.gr 10
+greedy data/pace2017/ex134.gr 10
+rmis data/pace2017/ex134.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex134.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex134.gr 10
+dc data/pace2017/ex134.gr 10
+hybrid data/pace2017/ex134.gr 10
+greedy data/pace2017/ex135.gr 10
+rmis data/pace2017/ex135.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex135.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex135.gr 10
+dc data/pace2017/ex135.gr 10
+hybrid data/pace2017/ex135.gr 10
+greedy data/pace2017/ex136.gr 10
+rmis data/pace2017/ex136.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex136.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex136.gr 10
+dc data/pace2017/ex136.gr 10
+hybrid data/pace2017/ex136.gr 10
+greedy data/pace2017/ex137.gr 10
+rmis data/pace2017/ex137.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex137.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex137.gr 10
+dc data/pace2017/ex137.gr 10
+hybrid data/pace2017/ex137.gr 10
+greedy data/pace2017/ex138.gr 10
+rmis data/pace2017/ex138.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex138.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex138.gr 10
+dc data/pace2017/ex138.gr 10
+hybrid data/pace2017/ex138.gr 10
+greedy data/pace2017/ex139.gr 10
+rmis data/pace2017/ex139.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex139.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex139.gr 10
+dc data/pace2017/ex139.gr 10
+hybrid data/pace2017/ex139.gr 10
+greedy data/pace2017/ex140.gr 10
+rmis data/pace2017/ex140.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex140.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex140.gr 10
+dc data/pace2017/ex140.gr 10
+hybrid data/pace2017/ex140.gr 10
+greedy data/pace2017/ex141.gr 10
+rmis data/pace2017/ex141.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex141.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex141.gr 10
+dc data/pace2017/ex141.gr 10
+hybrid data/pace2017/ex141.gr 10
+greedy data/pace2017/ex142.gr 10
+rmis data/pace2017/ex142.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex142.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex142.gr 10
+dc data/pace2017/ex142.gr 10
+hybrid data/pace2017/ex142.gr 10
+greedy data/pace2017/ex143.gr 10
+rmis data/pace2017/ex143.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex143.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex143.gr 10
+dc data/pace2017/ex143.gr 10
+hybrid data/pace2017/ex143.gr 10
+greedy data/pace2017/ex144.gr 10
+rmis data/pace2017/ex144.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex144.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex144.gr 10
+dc data/pace2017/ex144.gr 10
+hybrid data/pace2017/ex144.gr 10
+greedy data/pace2017/ex145.gr 10
+rmis data/pace2017/ex145.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex145.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex145.gr 10
+dc data/pace2017/ex145.gr 10
+hybrid data/pace2017/ex145.gr 10
+greedy data/pace2017/ex146.gr 10
+rmis data/pace2017/ex146.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex146.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex146.gr 10
+dc data/pace2017/ex146.gr 10
+hybrid data/pace2017/ex146.gr 10
+greedy data/pace2017/ex147.gr 10
+rmis data/pace2017/ex147.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex147.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex147.gr 10
+dc data/pace2017/ex147.gr 10
+hybrid data/pace2017/ex147.gr 10
+greedy data/pace2017/ex148.gr 10
+rmis data/pace2017/ex148.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex148.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex148.gr 10
+dc data/pace2017/ex148.gr 10
+hybrid data/pace2017/ex148.gr 10
+greedy data/pace2017/ex149.gr 10
+rmis data/pace2017/ex149.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex149.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex149.gr 10
+dc data/pace2017/ex149.gr 10
+hybrid data/pace2017/ex149.gr 10
+greedy data/pace2017/ex150.gr 10
+rmis data/pace2017/ex150.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex150.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex150.gr 10
+dc data/pace2017/ex150.gr 10
+hybrid data/pace2017/ex150.gr 10
+greedy data/pace2017/ex151.gr 10
+rmis data/pace2017/ex151.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex151.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex151.gr 10
+dc data/pace2017/ex151.gr 10
+hybrid data/pace2017/ex151.gr 10
+greedy data/pace2017/ex152.gr 10
+rmis data/pace2017/ex152.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex152.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex152.gr 10
+dc data/pace2017/ex152.gr 10
+hybrid data/pace2017/ex152.gr 10
+greedy data/pace2017/ex153.gr 10
+rmis data/pace2017/ex153.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex153.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex153.gr 10
+dc data/pace2017/ex153.gr 10
+hybrid data/pace2017/ex153.gr 10
+greedy data/pace2017/ex154.gr 10
+rmis data/pace2017/ex154.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex154.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex154.gr 10
+dc data/pace2017/ex154.gr 10
+hybrid data/pace2017/ex154.gr 10
+greedy data/pace2017/ex155.gr 10
+rmis data/pace2017/ex155.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex155.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex155.gr 10
+dc data/pace2017/ex155.gr 10
+hybrid data/pace2017/ex155.gr 10
+greedy data/pace2017/ex156.gr 10
+rmis data/pace2017/ex156.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex156.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex156.gr 10
+dc data/pace2017/ex156.gr 10
+hybrid data/pace2017/ex156.gr 10
+greedy data/pace2017/ex157.gr 10
+rmis data/pace2017/ex157.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex157.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex157.gr 10
+dc data/pace2017/ex157.gr 10
+hybrid data/pace2017/ex157.gr 10
+greedy data/pace2017/ex158.gr 10
+rmis data/pace2017/ex158.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex158.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex158.gr 10
+dc data/pace2017/ex158.gr 10
+hybrid data/pace2017/ex158.gr 10
+greedy data/pace2017/ex159.gr 10
+rmis data/pace2017/ex159.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex159.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex159.gr 10
+dc data/pace2017/ex159.gr 10
+hybrid data/pace2017/ex159.gr 10
+greedy data/pace2017/ex160.gr 10
+rmis data/pace2017/ex160.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex160.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex160.gr 10
+dc data/pace2017/ex160.gr 10
+hybrid data/pace2017/ex160.gr 10
+greedy data/pace2017/ex161.gr 10
+rmis data/pace2017/ex161.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex161.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex161.gr 10
+dc data/pace2017/ex161.gr 10
+hybrid data/pace2017/ex161.gr 10
+greedy data/pace2017/ex162.gr 10
+rmis data/pace2017/ex162.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex162.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex162.gr 10
+dc data/pace2017/ex162.gr 10
+hybrid data/pace2017/ex162.gr 10
+greedy data/pace2017/ex163.gr 10
+rmis data/pace2017/ex163.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex163.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex163.gr 10
+dc data/pace2017/ex163.gr 10
+hybrid data/pace2017/ex163.gr 10
+greedy data/pace2017/ex164.gr 10
+rmis data/pace2017/ex164.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex164.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex164.gr 10
+dc data/pace2017/ex164.gr 10
+hybrid data/pace2017/ex164.gr 10
+greedy data/pace2017/ex165.gr 10
+rmis data/pace2017/ex165.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex165.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex165.gr 10
+dc data/pace2017/ex165.gr 10
+hybrid data/pace2017/ex165.gr 10
+greedy data/pace2017/ex166.gr 10
+rmis data/pace2017/ex166.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex166.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex166.gr 10
+dc data/pace2017/ex166.gr 10
+hybrid data/pace2017/ex166.gr 10
+greedy data/pace2017/ex167.gr 10
+rmis data/pace2017/ex167.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex167.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex167.gr 10
+dc data/pace2017/ex167.gr 10
+hybrid data/pace2017/ex167.gr 10
+greedy data/pace2017/ex168.gr 10
+rmis data/pace2017/ex168.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex168.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex168.gr 10
+dc data/pace2017/ex168.gr 10
+hybrid data/pace2017/ex168.gr 10
+greedy data/pace2017/ex169.gr 10
+rmis data/pace2017/ex169.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex169.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex169.gr 10
+dc data/pace2017/ex169.gr 10
+hybrid data/pace2017/ex169.gr 10
+greedy data/pace2017/ex170.gr 10
+rmis data/pace2017/ex170.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex170.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex170.gr 10
+dc data/pace2017/ex170.gr 10
+hybrid data/pace2017/ex170.gr 10
+greedy data/pace2017/ex171.gr 10
+rmis data/pace2017/ex171.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex171.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex171.gr 10
+dc data/pace2017/ex171.gr 10
+hybrid data/pace2017/ex171.gr 10
+greedy data/pace2017/ex172.gr 10
+rmis data/pace2017/ex172.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex172.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex172.gr 10
+dc data/pace2017/ex172.gr 10
+hybrid data/pace2017/ex172.gr 10
+greedy data/pace2017/ex173.gr 10
+rmis data/pace2017/ex173.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex173.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex173.gr 10
+dc data/pace2017/ex173.gr 10
+hybrid data/pace2017/ex173.gr 10
+greedy data/pace2017/ex174.gr 10
+rmis data/pace2017/ex174.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex174.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex174.gr 10
+dc data/pace2017/ex174.gr 10
+hybrid data/pace2017/ex174.gr 10
+greedy data/pace2017/ex175.gr 10
+rmis data/pace2017/ex175.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex175.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex175.gr 10
+dc data/pace2017/ex175.gr 10
+hybrid data/pace2017/ex175.gr 10
+greedy data/pace2017/ex176.gr 10
+rmis data/pace2017/ex176.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex176.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex176.gr 10
+dc data/pace2017/ex176.gr 10
+hybrid data/pace2017/ex176.gr 10
+greedy data/pace2017/ex177.gr 10
+rmis data/pace2017/ex177.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex177.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex177.gr 10
+dc data/pace2017/ex177.gr 10
+hybrid data/pace2017/ex177.gr 10
+greedy data/pace2017/ex178.gr 10
+rmis data/pace2017/ex178.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex178.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex178.gr 10
+dc data/pace2017/ex178.gr 10
+hybrid data/pace2017/ex178.gr 10
+greedy data/pace2017/ex179.gr 10
+rmis data/pace2017/ex179.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex179.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex179.gr 10
+dc data/pace2017/ex179.gr 10
+hybrid data/pace2017/ex179.gr 10
+greedy data/pace2017/ex180.gr 10
+rmis data/pace2017/ex180.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex180.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex180.gr 10
+dc data/pace2017/ex180.gr 10
+hybrid data/pace2017/ex180.gr 10
+greedy data/pace2017/ex181.gr 10
+rmis data/pace2017/ex181.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex181.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex181.gr 10
+dc data/pace2017/ex181.gr 10
+hybrid data/pace2017/ex181.gr 10
+greedy data/pace2017/ex182.gr 10
+rmis data/pace2017/ex182.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex182.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex182.gr 10
+dc data/pace2017/ex182.gr 10
+hybrid data/pace2017/ex182.gr 10
+greedy data/pace2017/ex183.gr 10
+rmis data/pace2017/ex183.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex183.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex183.gr 10
+dc data/pace2017/ex183.gr 10
+hybrid data/pace2017/ex183.gr 10
+greedy data/pace2017/ex184.gr 10
+rmis data/pace2017/ex184.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex184.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex184.gr 10
+dc data/pace2017/ex184.gr 10
+hybrid data/pace2017/ex184.gr 10
+greedy data/pace2017/ex185.gr 10
+rmis data/pace2017/ex185.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex185.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex185.gr 10
+dc data/pace2017/ex185.gr 10
+hybrid data/pace2017/ex185.gr 10
+greedy data/pace2017/ex186.gr 10
+rmis data/pace2017/ex186.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex186.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex186.gr 10
+dc data/pace2017/ex186.gr 10
+hybrid data/pace2017/ex186.gr 10
+greedy data/pace2017/ex187.gr 10
+rmis data/pace2017/ex187.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex187.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex187.gr 10
+dc data/pace2017/ex187.gr 10
+hybrid data/pace2017/ex187.gr 10
+greedy data/pace2017/ex188.gr 10
+rmis data/pace2017/ex188.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex188.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex188.gr 10
+dc data/pace2017/ex188.gr 10
+hybrid data/pace2017/ex188.gr 10
+greedy data/pace2017/ex189.gr 10
+rmis data/pace2017/ex189.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex189.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex189.gr 10
+dc data/pace2017/ex189.gr 10
+hybrid data/pace2017/ex189.gr 10
+greedy data/pace2017/ex190.gr 10
+rmis data/pace2017/ex190.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex190.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex190.gr 10
+dc data/pace2017/ex190.gr 10
+hybrid data/pace2017/ex190.gr 10
+greedy data/pace2017/ex191.gr 10
+rmis data/pace2017/ex191.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex191.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex191.gr 10
+dc data/pace2017/ex191.gr 10
+hybrid data/pace2017/ex191.gr 10
+greedy data/pace2017/ex192.gr 10
+rmis data/pace2017/ex192.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex192.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex192.gr 10
+dc data/pace2017/ex192.gr 10
+hybrid data/pace2017/ex192.gr 10
+greedy data/pace2017/ex193.gr 10
+rmis data/pace2017/ex193.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex193.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex193.gr 10
+dc data/pace2017/ex193.gr 10
+hybrid data/pace2017/ex193.gr 10
+greedy data/pace2017/ex194.gr 10
+rmis data/pace2017/ex194.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex194.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex194.gr 10
+dc data/pace2017/ex194.gr 10
+hybrid data/pace2017/ex194.gr 10
+greedy data/pace2017/ex195.gr 10
+rmis data/pace2017/ex195.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex195.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex195.gr 10
+dc data/pace2017/ex195.gr 10
+hybrid data/pace2017/ex195.gr 10
+greedy data/pace2017/ex196.gr 10
+rmis data/pace2017/ex196.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex196.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex196.gr 10
+dc data/pace2017/ex196.gr 10
+hybrid data/pace2017/ex196.gr 10
+greedy data/pace2017/ex197.gr 10
+rmis data/pace2017/ex197.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex197.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex197.gr 10
+dc data/pace2017/ex197.gr 10
+hybrid data/pace2017/ex197.gr 10
+greedy data/pace2017/ex198.gr 10
+rmis data/pace2017/ex198.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex198.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex198.gr 10
+dc data/pace2017/ex198.gr 10
+hybrid data/pace2017/ex198.gr 10
+greedy data/pace2017/ex199.gr 10
+rmis data/pace2017/ex199.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex199.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex199.gr 10
+dc data/pace2017/ex199.gr 10
+hybrid data/pace2017/ex199.gr 10
+greedy data/pace2017/ex200.gr 10
+rmis data/pace2017/ex200.gr 10 --runs 1 --seed 1
+rmis data/pace2017/ex200.gr 10 --runs 64 --seed 1
+dp data/pace2017/ex200.gr 10
+dc data/pace2017/ex200.gr 10
+hybrid data/pace2017/ex200.gr 10

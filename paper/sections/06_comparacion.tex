@@ -1,0 +1,62 @@
+\section{Comparación de los tres algoritmos}\label{sec:comparacion}
+
+\subsection{Comparación sección por sección}
+La \cref{tab:comparacion} pone los tres algoritmos lado a lado con las mismas filas. La lectura clave es que cada uno usa \emph{un tipo distinto de información} sobre el grafo. El voraz usa información local (el grado). La PD usa información estructural global (una descomposición). El MIS aleatorio no usa información del grafo para decidir el orden y por eso es inmune a las instancias adversarias.
+
+\begin{table}[!htbp]
+\centering\footnotesize
+\renewcommand{\arraystretch}{1.3}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash\bfseries}p{2.3cm} *{3}{>{\raggedright\arraybackslash}X}@{}}
+\toprule
+ & Voraz de grado máximo (\cref{sec:voraz}) & PD sobre descomposición (\cref{sec:dp}) & MIS aleatorio de Veldt (\cref{sec:rmis}) \\
+\midrule
+Idea & Cubrir la mayor cantidad de aristas nuevas en cada paso & Separadores pequeños: el estado de una bolsa resume todo lo que importa & El complemento de un independiente maximal es una cubierta \\
+Información usada & Grado residual (local) & Descomposición en árbol (global) & Ninguna para el orden (azar) \\
+Decisión por paso & Determinista, irrevocable & Exhaustiva dentro de cada bolsa & Aleatoria, irrevocable \\
+Resultado & Cubierta heurística & Cubierta \textbf{óptima} & Cubierta heurística \\
+Garantía & $H(\Delta)\le 1+\ln\Delta$~\citep{johnson1974} & Exacta & $\mathbb E|C|\le 2\tau$~\citep{veldt2024} \\
+Tiempo & $O(n+m)$ (\cref{thm:voraz}) & $O(2^{w}wn)$ (\cref{thm:dp}) & $O(n+m)$ por corrida \\
+Memoria & $O(n+m)$ & $O(2^{w}n)$ & $O(n+m)$ \\
+Funciona bien en & Grafos dispersos, redes con vértices de grado alto & Árboles, $k$-árboles, bandas, planares pequeños & Cualquier grafo, en esperanza \\
+Falla en & Trampa de Johnson ($\Theta(\log n)$), empates en caminos & Grafos aleatorios, densos o expansores ($w=\Theta(n)$) & No aprovecha estructura (hojas, grados altos) \\
+Qué toma \hyvc & Cota superior y regla de ramificación (grado máximo) & Resolver exacto las componentes con tabla barata & Cota superior Monte Carlo por diversidad \\
+\bottomrule
+\end{tabularx}
+\caption{Comparación de los tres algoritmos estudiados. $w$ es el ancho de la descomposición disponible.}
+\label{tab:comparacion}
+\end{table}
+
+\paragraph{Complejidad frente a calidad.} El voraz y el MIS aleatorio son lineales y no garantizan el óptimo. La PD lo garantiza, pero su costo depende de un parámetro estructural que la mayoría de los grafos grandes no tiene pequeño. Ninguno de los tres domina a los otros: el voraz pierde frente al MIS en la trampa de Johnson, el MIS pierde frente al voraz en grafos con muchas hojas, y la PD les gana a ambos solo cuando el ancho es pequeño.
+
+\paragraph{Qué tienen en común.} Los tres son \emph{constructivos}: deciden la pertenencia de cada vértice una sola vez. Ninguno reduce el grafo antes de decidir, aunque las reglas exactas más simples (la de la hoja, por ejemplo) arreglan los fallos del voraz en bosques. Ninguno aprovecha que el grafo pueda estar desconectado, aunque $\tau$ es aditivo sobre componentes. Esas dos observaciones son el punto de partida del híbrido.
+
+\subsection{Puntos de comparación externos}\label{sec:sota}
+\paragraph{Divide y vencerás exponencial (Weigt y Hartmann).} Para obtener cubiertas mínimas exactas, Weigt y Hartmann usan un procedimiento recursivo~\citep{weigt2001}: se toma el vértice libre $i$ de mayor grado y se abren dos ramas, $i\in C$ (se borra $i$) o $i\notin C$ (todos sus vecinos entran y se borra $N[i]$). En cada rama, el grafo residual se divide en componentes conexas que se resuelven por separado (\cref{alg:dc}). Es el punto de comparación exponencial de este trabajo.
+
+\begin{algorithm}[!htbp]
+\caption{\alg{DyV-WH}$(G)$: divide y vencerás exacto de Weigt y Hartmann}\label{alg:dc}
+\lIf{$G$ no tiene aristas}{\Return $\emptyset$}
+\If{$G$ tiene componentes $G_1,\dots,G_r$ con $r>1$}{\Return $\bigcup_j$\alg{DyV-WH}$(G_j)$}
+$i\gets\arg\max_v\deg(v)$\;
+$C_1\gets\{i\}\cup$\alg{DyV-WH}$(G-i)$;\quad $C_2\gets N(i)\cup$\alg{DyV-WH}$(G-N[i])$\;
+\Return el menor entre $C_1$ y $C_2$\;
+\end{algorithm}
+
+\begin{proposition}\label{prop:dc}
+\alg{DyV-WH} es exacto y corre en tiempo $O^*(\varphi^{n})$, con $\varphi=\frac{1+\sqrt5}{2}\approx1.618$.
+\end{proposition}
+\begin{proof}
+Es exacto porque toda cubierta contiene a $i$ o, si no lo contiene, a todo $N(i)$, y porque $\tau$ es aditivo sobre componentes. Si $\Delta\ge 1$, la rama $i\in C$ borra un vértice y la rama $N(i)\subseteq C$ borra al menos dos. Entonces $T(n)\le T(n-1)+T(n-2)+\mathrm{poly}(n)$, cuya solución es $O^*(\varphi^n)$. La división en componentes solo puede reducir el número de nodos: si el grafo residual se fragmenta en componentes de tamaño $O(\log n)$, el costo total es polinomial.
+\end{proof}
+
+\paragraph{El mejor solucionador actual: \textsc{WeGotYouCovered}.} Ganó el track de \textsc{Vertex Cover} del PACE~2019~\citep{dzulfikar2019,hespe2020}. Sus autores lo describen como un portafolio que combina técnicas de los tres problemas hermanos de la \cref{prop:gallai}: reglas de reducción y \emph{branch \& reduce} para MVC, búsqueda local iterada para independientes máximos y un \emph{branch \& bound} de clique máxima~\citep{hespe2020}. Primero reduce el grafo exhaustivamente con las reglas de Akiba e Iwata~\citep{akiba2016}. Sobre el núcleo resultante combina la búsqueda local, que aporta buenas cotas superiores, con la búsqueda exacta, o bien lo convierte en una instancia de clique máxima sobre el grafo complemento. Los autores reportan además un hallazgo poco intuitivo: reducir antes puede, en ocasiones, empeorar el desempeño de un \emph{branch \& bound}~\citep{hespe2020}. No pudimos compilar su código en nuestro entorno, así que la comparación usa sus resultados publicados por instancia, que incluyen el tiempo de cada una de las 200 instancias del PACE~2019 con un límite de 30 minutos (\cref{sec:casos}).
+
+\subsection{De la comparación al diseño}\label{sec:principios}
+La comparación sugiere cinco principios, que el híbrido de la \cref{sec:hyvc} implementa:
+\begin{enumerate}
+  \item \textbf{Lo barato primero.} El voraz y el MIS aleatorio cuestan $O(n+m)$. Se pueden ejecutar siempre, y la mejor de sus cubiertas es una cota superior para podar la búsqueda exacta.
+  \item \textbf{Reducir antes de decidir.} Las reglas exactas (hojas, triángulos, plegado, dominancia) eliminan los casos en que el voraz falla y achican el problema sin perder optimalidad.
+  \item \textbf{Dividir siempre.} Como en Weigt y Hartmann, cada decisión puede desconectar el grafo, y resolver las componentes por separado convierte un producto de árboles de búsqueda en una suma.
+  \item \textbf{Exactitud por estructura cuando sale barata.} La PD se usa solo cuando el costo de sus tablas, que se puede calcular antes de ejecutarla (\cref{thm:dp}), cabe en un presupuesto.
+  \item \textbf{Acotar por debajo.} Para saber cuándo dejar de buscar hace falta una cota inferior. La relajación LP de Nemhauser y Trotter~\citep{nemhauser1975}, calculada con un matching bipartito, es la más fuerte de las baratas.
+\end{enumerate}

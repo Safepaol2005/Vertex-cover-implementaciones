@@ -1,0 +1,10 @@
+data/synthetic/ba2000_m5_s1.gr
+data/synthetic/ba2000_m5_s2.gr
+data/synthetic/band1000_b16_s1.gr
+data/synthetic/band1000_b16_s2.gr
+data/synthetic/er1000_c4_s1.gr
+data/synthetic/er1000_c4_s2.gr
+data/synthetic/er1000_c4_s3.gr
+data/synthetic/er1000_c6_s1.gr
+data/synthetic/er1000_c6_s2.gr
+data/synthetic/er1000_c6_s3.gr

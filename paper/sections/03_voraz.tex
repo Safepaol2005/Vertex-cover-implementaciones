@@ -1,0 +1,47 @@
+\section{Algoritmo voraz de grado máximo (Weigt y Hartmann)}\label{sec:voraz}
+
+\subsection{Enfoque}
+En el museo de Weigt y Hartmann, poner un guardia en un cruce vigila todos los caminos que salen de él. La idea voraz es poner siempre el siguiente guardia donde más caminos \emph{todavía sin vigilar} se cubren: el vértice de mayor grado del grafo residual. Ese vértice entra en la cubierta, sus aristas desaparecen y se repite el paso hasta que no quedan aristas. Weigt y Hartmann usan esta heurística en sus estudios de MVC sobre grafos aleatorios. Les sirve para obtener rápidamente buenas cubiertas y como cota superior del algoritmo exacto~\citep{weigt2000,weigt2001}.
+
+\paragraph{¿Por qué así?} Cada vértice ``compra'' las aristas que toca. MVC es entonces un caso particular de \textsc{Set Cover}: el universo son las aristas y el conjunto de cada vértice son sus aristas incidentes. La regla de grado máximo es la regla voraz clásica de \textsc{Set Cover}, que elige el conjunto que cubre más elementos nuevos. Johnson mostró que esa regla garantiza un factor $H(\Delta)\le 1+\ln\Delta$ respecto al óptimo y que el factor logarítmico no se puede evitar en el peor caso~\citep{johnson1974}. En el caso típico la regla es mucho mejor que su garantía: en grafos dispersos, los vértices de grado alto suelen pertenecer a alguna cubierta mínima, y quitarlos fragmenta el grafo rápido.
+
+\subsection{Algoritmo}
+El \cref{alg:voraz} mantiene los vértices en \emph{cubetas} indexadas por su grado residual. Así, encontrar el máximo y actualizar un grado cuestan tiempo constante amortizado.
+
+\begin{algorithm}[!htbp]
+\caption{\alg{Voraz-WH}$(G)$: voraz de grado máximo con cubetas}\label{alg:voraz}
+\Input{grafo $G=(V,E)$}
+\Output{una cubierta de vértices $C$}
+\lForEach{$v\in V$}{$d(v)\gets\deg(v)$; insertar $v$ en la cubeta $\mathcal B[d(v)]$}
+$C\gets\emptyset$;\quad $g\gets\Delta$\;
+\While{$g>0$}{
+  \lIf{$\mathcal B[g]=\emptyset$}{$g\gets g-1$; \textbf{continuar}}
+  sacar un vértice $v$ de $\mathcal B[g]$;\quad $C\gets C\cup\{v\}$\;
+  \ForEach{$w\in N(v)$ con $w\notin C$}{
+    mover $w$ de $\mathcal B[d(w)]$ a $\mathcal B[d(w)-1]$;\quad $d(w)\gets d(w)-1$\;
+  }
+  $d(v)\gets 0$\;
+}
+\Return $C$\;
+\end{algorithm}
+
+\begin{proposition}[Corrección]
+\alg{Voraz-WH} devuelve una cubierta de vértices.
+\end{proposition}
+\begin{proof}
+$d(w)$ es siempre el número de aristas de $w$ que todavía no tocan $C$. El ciclo termina cuando todos los vértices tienen $d=0$, es decir, cuando ninguna arista queda descubierta.
+\end{proof}
+
+\begin{theorem}[Complejidad]\label{thm:voraz}
+\alg{Voraz-WH} corre en tiempo $O(n+m)$ y memoria $O(n+m)$.
+\end{theorem}
+\begin{proof}
+Cada cubeta es un arreglo dinámico en el que cada vértice recuerda su posición. Sacar un vértice se hace intercambiándolo con el último de su cubeta, y meterlo es añadirlo al final, así que ambas operaciones cuestan $O(1)$. Cada vértice entra a $C$ a lo sumo una vez, y en ese momento se recorre su lista de adyacencia una sola vez. Las actualizaciones suman entonces $\sum_v\deg(v)=2m$. El índice $g$ solo decrece: arranca en $\Delta\le n-1$ y baja una unidad por cada cubeta vacía que encuentra, lo que aporta $O(n)$. Cuando $v$ entra a $C$, los grados de sus vecinos bajan en uno, así que el máximo actual nunca supera a $g$ y no hace falta volver a subir. En total el tiempo es $O(n+m)$.
+\end{proof}
+
+\subsection{Garantía y tipos de grafos}
+\paragraph{Peor caso: la trampa de Johnson.} Sea $L=\{\ell_1,\dots,\ell_k\}$. Para cada $i=2,\dots,k$ se añade un bloque $R_i$ de $\lfloor k/i\rfloor$ vértices, y cada vértice de $R_i$ se conecta a $i$ vértices distintos de $L$. El grafo es bipartito, $L$ es una cubierta de tamaño $k$, y un vértice de $L$ tiene grado a lo sumo $k-1$. Por eso el primer paso del voraz toma el vértice de $R_k$, que tiene grado $k$. Después los grados de $L$ bajan y, con desempates desfavorables, el algoritmo termina tomando todo $R=\bigcup_iR_i$. Eso son $\sum_{i\ge 2}\lfloor k/i\rfloor=\Theta(k\log k)$ vértices frente a $k$, una razón $\Theta(\log k)$~\citep{johnson1974}. En nuestros experimentos, con $k=160$, el voraz toma \input{tables/trap_greedy.tex}.
+
+\paragraph{Fallo en grafos sencillos.} Incluso un camino de cinco vértices $1\!-\!2\!-\!3\!-\!4\!-\!5$ lo engaña. Si entre los empatados de grado 2 elige $3$, quedan las aristas $\{1,2\}$ y $\{4,5\}$, y la cubierta final tiene $3$ vértices cuando $\{2,4\}$ basta. La regla de la hoja (``el vecino de una hoja entra'') resuelve los bosques de forma óptima; la de grado máximo no.
+
+\paragraph{Dónde funciona.} El voraz es un muy buen punto de partida en grafos dispersos, que es el régimen de los grafos aleatorios estudiados por Weigt y Hartmann~\citep{weigt2000}, y en redes con vértices de grado muy alto (ley de potencias), donde esos vértices suelen pertenecer a la cubierta óptima. Su gran ventaja es el costo, $O(n+m)$ sin constantes ocultas, que permite usarlo como cota superior dentro de un algoritmo exacto. En la \cref{sec:resultados} medimos que en las instancias del PACE~2019 queda, en promedio, \input{tables/greedy_avg_gap.tex} por encima del óptimo.

@@ -1,0 +1,20 @@
+\section{Introducción}\label{sec:intro}
+
+Imagine el director de un museo al aire libre que debe vigilar todos los caminos del parque poniendo guardias en los cruces, y que quiere pagar el menor número posible de guardias. Esa es la imagen con la que Weigt y Hartmann presentan el problema de la \emph{cubierta de vértices} (\textsc{Vertex Cover}) en su estudio sobre grafos aleatorios~\citep{weigt2000}: los cruces son vértices, los caminos son aristas y un conjunto de guardias es válido si toca todas las aristas. El problema es sencillo de enunciar, es uno de los 21 problemas NP-completos originales de Karp~\citep{karp1972} y, más de cincuenta años después, sigue siendo un banco de pruebas central en algoritmos aproximados, en complejidad parametrizada y en ingeniería de algoritmos~\citep{cygan2015,dzulfikar2019}.
+
+Este trabajo estudia tres maneras muy distintas de atacarlo, una por paradigma:
+\begin{enumerate}
+  \item \textbf{Voraz.} La heurística de \emph{grado máximo} que Weigt y Hartmann usan como cota superior en sus experimentos~\citep{weigt2001}. Repite una decisión local: poner un guardia en el cruce del que salen más caminos sin vigilar.
+  \item \textbf{Programación dinámica.} La programación dinámica sobre una \emph{descomposición en árbol}~\citep{bannach2019,alber2005}. Aprovecha que muchos grafos ``se parecen a un árbol'' y resuelve el problema de forma exacta en tiempo exponencial solo en el ancho de esa descomposición.
+  \item \textbf{Aleatorizado.} El algoritmo de Veldt~\citep{veldt2024}, que construye un conjunto independiente maximal recorriendo los vértices en orden aleatorio. En tiempo lineal y sin parámetros da una cubierta que, en esperanza, es a lo sumo el doble de la óptima.
+\end{enumerate}
+
+\paragraph{Preguntas.} Para cada algoritmo nos preguntamos cuál es su enfoque, por qué está construido así, cuánto cuesta y en qué tipos de grafos funciona. Después, ¿qué parte de cada uno es la que realmente aporta? ¿Se pueden combinar esas partes en un algoritmo que funcione bien en más tipos de grafos que cualquiera de los tres por separado?
+
+\paragraph{Contribuciones.}
+\begin{itemize}
+  \item Un marco teórico que reúne la historia del problema y la ubica alrededor de las tres ideas estudiadas (\cref{sec:marco}).
+  \item Una sección por algoritmo con su enfoque, pseudocódigo, análisis de complejidad y régimen favorable, con las afirmaciones clave citadas de los artículos originales (\cref{sec:voraz,sec:dp,sec:rmis}).
+  \item Una comparación sección por sección de los tres (\cref{sec:comparacion}), los casos de prueba públicos que usamos (\cref{sec:casos}) y un algoritmo híbrido, \hyvc, con su pseudocódigo, su prueba de corrección y su análisis de complejidad (\cref{sec:hyvc}).
+  \item Implementaciones en C++ de los tres algoritmos, del divide y vencerás exponencial de Weigt y Hartmann y de \hyvc. Las evaluamos sobre las 200 instancias oficiales del PACE~2019~\citep{pace2019data}, las 200 del PACE~2017 con ancho de árbol conocido~\citep{pace2017data} y familias sintéticas reproducibles. La comparación incluye al ganador del PACE~2019, \textsc{WeGotYouCovered}~\citep{hespe2020}, a partir de sus resultados publicados por instancia (\cref{sec:resultados}). El análisis también incluye los casos en que \hyvc{} falla y por qué.
+\end{itemize}

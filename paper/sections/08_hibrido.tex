@@ -1,0 +1,109 @@
+\section{El algoritmo híbrido \hyvc}\label{sec:hyvc}
+
+\hyvc{} implementa los cinco principios de la \cref{sec:principios}. Usa los tres algoritmos estudiados como piezas: el voraz y el MIS aleatorio dan cotas superiores, la PD resuelve las componentes de estructura favorable, y la regla de grado máximo del voraz elige dónde ramificar. Se añaden tres elementos clásicos: reglas de reducción exactas, la división en componentes de Weigt y Hartmann y la cota inferior LP de Nemhauser y Trotter. La \cref{tab:origen} indica de dónde sale cada pieza.
+
+\begin{table}[!htbp]
+\centering\small
+\begin{tabularx}{\textwidth}{@{}l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X@{}}
+\toprule
+Fase & Qué hace & De dónde viene \\
+\midrule
+1. Reducir & Reglas R0--R5 hasta punto fijo & Reglas clásicas~\citep{cygan2015,akiba2016} y reducción LP de Nemhauser--Trotter~\citep{nemhauser1975}; corrige el fallo del voraz en bosques \\
+2. Dividir & Resolver cada componente conexa por separado & Divide y vencerás de Weigt y Hartmann~\citep{weigt2001} \\
+3. Despachar & PD exacta si $\kappa(H)\le\kappa'$ & Programación dinámica (\cref{sec:dp})~\citep{bannach2019,alber2005} \\
+4. Acotar & Superior: voraz y $R$ corridas del MIS aleatorio; inferior: $\max\{\mathrm{LP},\ \text{cliques},\ \text{matching}\}$ & \cref{sec:voraz,sec:rmis}; Nemhauser--Trotter~\citep{nemhauser1975} \\
+5. Ramificar & Sobre el vértice de grado máximo, con presupuesto & Regla del voraz; esquema de \alg{DyV-WH} \\
+6. \emph{Anytime} & Si se agota el tiempo, devuelve la mejor cubierta & --- \\
+\bottomrule
+\end{tabularx}
+\caption{Origen de cada fase de \hyvc.}
+\label{tab:origen}
+\end{table}
+
+\subsection{Reglas de reducción}
+\begin{lemma}\label{lem:reglas}
+Cada regla transforma $G$ en $G'$ y fija un conjunto $F$ de vértices de la cubierta, de modo que $\tau(G)=\tau(G')+|F|$ (en R3, $\tau(G)=\tau(G')+1$), y de una cubierta mínima de $G'$ se reconstruye una mínima de $G$.
+\begin{description}
+  \item[R0] $\deg(v)=0$: borrar $v$.
+  \item[R1] $\deg(v)=1$, $N(v)=\{u\}$: $u\in F$. Cualquier cubierta que use $v$ puede cambiarlo por $u$.
+  \item[R2] $\deg(v)=2$, $N(v)=\{u,w\}$ con $uw\in E$: $u,w\in F$. El triángulo exige dos de sus vértices; si una cubierta usa $v$, se cambia $v$ por el vecino que falte, porque $v$ no tiene otras aristas.
+  \item[R3] \emph{Plegado}: $\deg(v)=2$, $N(v)=\{u,w\}$ con $uw\notin E$. Se reemplazan $u,v,w$ por un vértice nuevo $x$ con $N(x)=N(u)\cup N(w)\setminus\{v\}$. Si $x$ queda en la cubierta de $G'$, se toman $u$ y $w$; si no, se toma $v$~\citep{cygan2015}.
+  \item[R4] \emph{Dominancia}: si $u\in N(v)$ y $N[u]\subseteq N[v]$, entonces $v\in F$. Si una cubierta mínima omite a $v$, contiene a $N(v)\supseteq N[u]\setminus\{v\}$, y $u$ se puede cambiar por $v$~\citep{akiba2016}.
+  \item[R4$'$] \emph{No confinado}: se parte de $S=\{v\}$. Mientras exista $u\in N(S)$ con un único vecino en $S$, se toma el que tenga menos vecinos fuera de $N[S]$. Si no tiene ninguno, $v$ es \emph{no confinado} y existe una cubierta mínima que lo contiene. Si tiene exactamente uno, $w$, se añade $w$ a $S$ y se repite. Esta regla, que usan Akiba e Iwata y generaliza la dominancia~\citep{akiba2016}, es la que más achica los núcleos del PACE; en la instancia 033, por ejemplo, pasa de 3\,120 a 138 vértices.
+  \item[R5] \emph{Reducción LP}: se calcula un óptimo semientero $x$ de la relajación \eqref{eq:ilp} con un matching máximo de Hopcroft--Karp en el doble bipartito y la cubierta de Kőnig asociada. Por el teorema de Nemhauser y Trotter~\citep{nemhauser1975}, existe una cubierta mínima que contiene a $\{x_v=1\}$ y evita a $\{x_v=0\}$, así que los primeros entran en $F$ y los segundos se borran.
+\end{description}
+\end{lemma}
+Tras aplicar R0--R3 hasta el punto fijo (las demás reglas solo eliminan más vértices), todo vértice restante tiene grado al menos $3$. Este dato se usa en el análisis de complejidad.
+
+\subsection{Algoritmo}
+\begin{algorithm}[!htbp]
+\caption{\hyvc$(G;\ \kappa_{\max},R,T)$}\label{alg:hyvc}
+\Input{grafo $G$; tope de celdas de la PD $\kappa_{\max}$; corridas Monte Carlo $R$; tiempo $T$}
+\Output{cubierta $C$ y bandera \textit{exacta}}
+$(G',F,\mathcal P)\gets$\textsc{Reducir}$(G)$\Comment*[r]{R0--R5; $\mathcal P$: plegados}
+$C\gets\emptyset$;\quad \textit{exacta}$\gets$\textbf{verdadero}\;
+\ForEach{componente conexa $H$ de $G'$}{
+  \eIf{$\kappa(H)\le\kappa_{\max}$}{$C\gets C\cup$\alg{PD-TD}$(H)$\Comment*[r]{\cref{alg:dp}}}{
+    $U\gets$ la menor entre \alg{Voraz-WH}$(H)$ y \alg{MIS-Aleatorio}$(H,R)$, sin redundantes\;
+    $S\gets$\textsc{Resolver}$(H,|U|)$ con límite de tiempo $T$\;
+    \lIf{se agotó el tiempo}{$S\gets U$; \textit{exacta}$\gets$\textbf{falso}}
+    \lIf{$S=\bot$}{$S\gets U$\Comment*[f]{no hay cubierta $<|U|$: $U$ es óptima}}
+    $C\gets C\cup S$\;
+  }
+}
+\Return \textsc{Desplegar}$(C\cup F,\mathcal P)$, \textit{exacta}\;
+\end{algorithm}
+
+\begin{algorithm}[!htbp]
+\caption{\textsc{Resolver}$(H,b)$: cubierta mínima de $H$ si $\tau(H)<b$; si no, $\bot$}\label{alg:resolver}
+$(H',F,\mathcal P)\gets$\textsc{Reducir}$(H)$;\quad $b\gets b-|F|-|\mathcal P|$;\quad \lIf{$b\le0$}{\Return $\bot$}
+sean $H_1,\dots,H_r$ las componentes de $H'$ (de menor a mayor) y $\ell_j\gets\max\{\mathrm{LP}(H_j),\mathrm{cliques}(H_j),|M(H_j)|\}$\;
+\lIf{$\sum_j\ell_j\ge b$}{\Return $\bot$}
+\For{$j=1,\dots,r$}{
+  $b_j\gets b-\sum_{i<j}|S_i|-\sum_{i>j}\ell_i$\Comment*[r]{presupuesto exclusivo de $H_j$}
+  $\kappa'\gets\kappa_{\max}$ si $|V(H_j)|>100$; si no, $\kappa'\gets 2^{16}$\;
+  \eIf{$\kappa(H_j)\le\kappa'$}{$S_j\gets$\alg{PD-TD}$(H_j)$, o $\bot$ si $|S_j|\ge b_j$}{
+    $S_j\gets$ cota voraz de $H_j$ si es $<b_j$ (y entonces $b_j\gets|S_j|$)\;
+    $v\gets\arg\max_x\deg(x)$\;
+    $S_j\gets$ la mejor entre $\{v\}\cup$\textsc{Resolver}$(H_j-v,\,b_j-1)$ y $N(v)\cup$\textsc{Resolver}$(H_j-N[v],\,b_j-\deg v)$\;
+  }
+  \lIf{$S_j=\bot$}{\Return $\bot$}
+}
+\Return \textsc{Desplegar}$(F\cup\bigcup_jS_j,\mathcal P)$\;
+\end{algorithm}
+
+\paragraph{Parámetros.} En todos los experimentos usamos $\kappa_{\max}=2^{26}$ celdas en la raíz y en las componentes de más de 100 vértices, $2^{16}$ en las componentes pequeñas de los nodos internos, ancho máximo $22$ para la PD, $R=64$ corridas del MIS aleatorio en la raíz y $4$ en cada nodo interno. La razón del tope doble es práctica. Dentro de la búsqueda la PD puede invocarse miles de veces, y en componentes pequeñas la ramificación es más barata que una tabla grande. Con un único tope alto, las instancias densas de 200 vértices gastaban la mayor parte del tiempo en tablas inútiles. Con uno bajo, en cambio, la PD no alcanzaba las bandas de ancho 17--18, que resuelve en una décima de segundo.
+
+\subsection{Corrección}
+\begin{theorem}\label{thm:hyvc}
+\hyvc{} siempre devuelve una cubierta de vértices. Si termina con \textit{exacta}$=$verdadero, la cubierta es mínima.
+\end{theorem}
+\begin{proof}[Idea de la prueba]
+\emph{Factibilidad.} Cada componente recibe una cubierta válida: la de la PD, la de \textsc{Resolver} o la cota $U$. Las aristas eliminadas por las reglas quedan cubiertas por $F$ o por el despliegue de R3 (\cref{lem:reglas}), y no hay aristas entre componentes distintas.
+\emph{Optimalidad.} Por el \cref{lem:reglas} basta con resolver $G'$, y como $\tau$ es aditivo sobre componentes basta con resolver cada componente. Para \textsc{Resolver} se argumenta por inducción que devuelve una cubierta mínima si $\tau(H)<b$ y $\bot$ si no. La poda es válida porque $\ell_j\le\tau(H_j)$: las tres cotas son cotas inferiores por \eqref{eq:matching}, por $\mathrm{LP}\le\tau$ y porque una clique de tamaño $q$ exige $q-1$ vértices. Si $\tau(H_j)\ge b_j$, entonces $\sum_i\tau(H_i)\ge b$, y responder $\bot$ es correcto. La ramificación es exhaustiva porque toda cubierta contiene a $v$ o a $N(v)$. Por último, si \textsc{Resolver}$(H,|U|)=\bot$, ninguna cubierta de $H$ es menor que $U$.
+\end{proof}
+
+\subsection{Complejidad}
+\begin{theorem}\label{thm:hyvc-cx}
+Sea $U$ la cota superior inicial de una componente. El número de nodos de \textsc{Resolver} es $O(1.4656^{|U|})$, y el trabajo por nodo es polinomial: $O(\sum_v\deg(v)^2)$ por ronda de las reglas locales, $O(m\sqrt n)$ por la regla R5 y la cota LP, y a lo sumo $O(\kappa_{\max}\,w)$ por la PD. En particular, \hyvc{} corre en $O^*(1.4656^{n})$, frente a $O^*(1.618^{n})$ de \alg{DyV-WH} (\cref{prop:dc}).
+\end{theorem}
+\begin{proof}
+Al ramificar, el grafo ya está reducido, así que $\deg(v)\ge 3$. La rama $v\in C$ consume una unidad de presupuesto y la rama $N(v)\subseteq C$ consume al menos tres. El presupuesto nunca aumenta, las reglas solo lo disminuyen, y cuando llega a $0$ la rama se poda. El número de nodos cumple entonces $T(b)\le T(b-1)+T(b-3)+1$. La raíz real de $x^3=x^2+1$ es $\approx1.4656$, de donde $T(b)=O(1.4656^b)$ con $b\le|U|\le n$. La regla R5 y la cota LP se calculan con un matching máximo en el doble bipartito, que con Hopcroft--Karp cuesta $O(m\sqrt n)$~\citep{hopcroft1973}. La PD está acotada por el \cref{thm:dp} y el tope $\kappa_{\max}$.
+\end{proof}
+
+\subsection{Tipos de grafos: dónde funciona y dónde no}\label{sec:hyvc-clases}
+\begin{proposition}\label{prop:clases}
+\hyvc{} resuelve sin ramificar, en tiempo polinomial: (a) los bosques y los grafos de grado máximo $2$ (caminos y ciclos), solo con las reglas R0--R3; (b) toda componente del núcleo cuya tabla de PD cabe en $\kappa_{\max}$, en particular aquellas cuyo ancho de eliminación $w$ cumple $w\le\log_2(\kappa_{\max}/n)-1$, porque $\kappa\le n\,2^{w+1}$; (c) cualquier unión disjunta de grafos de esas clases.
+\end{proposition}
+\begin{proof}
+(a) En un bosque siempre hay una hoja o un vértice aislado, y R1/R0 lo eliminan. En un camino ocurre lo mismo. En un ciclo de longitud $\ge 4$, R3 lo acorta en dos vértices, y al llegar a un triángulo actúa R2. (b) Es el despacho a la PD, con el costo del \cref{thm:dp}. (c) Se sigue de la división en componentes.
+\end{proof}
+
+En los grafos bipartitos, además, la cota LP es exacta ($\mathrm{LP}=\tau$ por el teorema de Kőnig), así que la búsqueda se detiene en cuanto la cota superior alcanza el óptimo.
+
+Las reglas, la PD y la división no garantizan nada en tres situaciones, y ahí está la explicación de los fallos que medimos en la \cref{sec:resultados}:
+\begin{enumerate}
+  \item \textbf{Grafos sin estructura explotable.} Si ninguna regla aplica (grado mínimo $\ge 3$ y sin dominancias), el ancho es grande y la cota LP está lejos de $\tau$, el algoritmo queda en la ramificación exponencial del \cref{thm:hyvc-cx}. Es el caso de los grafos aleatorios por encima de $c\approx e$ y de las instancias densas de 200 vértices del PACE~2019.
+  \item \textbf{Núcleos más grandes que los del estado del arte.} Nuestras reglas son un subconjunto de las de Akiba e Iwata~\citep{akiba2016}: faltan, entre otras, las de gemelos, embudos y coronas generalizadas. En algunas instancias del PACE el núcleo de \hyvc{} es varias veces mayor que el de \textsc{WeGotYouCovered}, y la ramificación sobre ese exceso es exponencial.
+  \item \textbf{La respuesta \emph{anytime}.} Cuando se agota el tiempo, \hyvc{} devuelve esencialmente la mejor de sus cotas voraces. No incluye búsqueda local, como la de \textsc{WeGotYouCovered}, para mejorarla.
+\end{enumerate}

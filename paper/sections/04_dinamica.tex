@@ -1,0 +1,56 @@
+\section{Programación dinámica sobre descomposiciones en árbol}\label{sec:dp}
+
+\subsection{Enfoque}
+En un árbol, MVC se resuelve con una recursión de dos estados: para cada vértice $v$, el costo óptimo del subárbol de $v$ si $v$ está en la cubierta y si no lo está. Si $v$ no está, todos sus hijos deben estar; si está, cada hijo elige su mejor opción. La programación dinámica sobre descomposiciones en árbol generaliza esta idea a cualquier grafo. En lugar de un vértice, el ``punto de corte'' es una bolsa $B_t$, y el estado es \emph{qué subconjunto $S\subseteq B_t$ está en la cubierta}. Como cada bolsa separa el grafo (\cref{sec:td}), la mejor manera de completar la cubierta debajo de $t$ depende solo de $S$, no de lo que ocurra arriba. Es el principio de optimalidad de Bellman aplicado a un separador.
+
+\paragraph{¿Por qué así?} El costo es exponencial solo en el tamaño de las bolsas, porque hay $2^{|B_t|}$ estados por nodo, y lineal en el número de nodos. Bannach y Berndt resumen el atractivo del enfoque: muchos problemas NP-difíciles se vuelven tratables en grafos de ancho de árbol pequeño, y la programación dinámica sobre la descomposición es la herramienta estándar para lograrlo~\citep{bannach2019}. Alber, Dorn y Niedermeier lo aplicaron precisamente a MVC en grafos planares y lo evaluaron experimentalmente~\citep{alber2005}. En ambos trabajos el cuello de botella práctico es el mismo: el tamaño de las tablas, que depende de qué tan buena sea la descomposición disponible.
+
+\subsection{Obtener la descomposición: eliminación por grado mínimo}
+Calcular $\tw(G)$ es NP-difícil~\citep{arnborg1987}. Usamos la heurística clásica de \emph{eliminación}: se toma el vértice $v$ de menor grado, se crea la bolsa $\mathrm{bag}(v)=N(v)\cup\{v\}$, se convierte $N(v)$ en clique (aristas de relleno) y se borra $v$. El padre de $\mathrm{bag}(v)$ es la bolsa del vecino de $v$ que se elimina primero después de $v$.
+
+\begin{lemma}\label{lem:elim}
+Las bolsas así construidas forman una descomposición en árbol de $G$ de ancho $w=\max_v|N(v)|$ (medido al eliminar $v$). Además, para cada hijo $c$ de $p$ se cumple $\mathrm{bag}(c)\setminus\{c\}\subseteq\mathrm{bag}(p)$.
+\end{lemma}
+\begin{proof}[Idea de la prueba]
+Toda arista $\{u,v\}$ aparece en la bolsa del extremo que se elimina primero. Cuando se elimina $c$, sus vecinos posteriores quedan formando una clique. El primero de ellos en eliminarse es $p$, y en ese momento los demás siguen siendo sus vecinos, así que están en $\mathrm{bag}(p)$. Esta segunda propiedad implica la conexidad de los subárboles de cada vértice.
+\end{proof}
+La segunda propiedad simplifica mucho la implementación. Al pasar de un hijo $c$ a su padre basta con ``olvidar'' el vértice $c$, y la tabla resultante ya queda indexada por bits de la bolsa del padre.
+
+\subsection{Recurrencia y algoritmo}
+Para un nodo $t$ con bolsa $B_t$ y un subconjunto $S\subseteq B_t$, sea $T_t[S]$ el tamaño mínimo de una cubierta del subgrafo inducido por los vértices de las bolsas del subárbol de $t$ que coincida con $S$ dentro de $B_t$. Decimos que $S$ es \emph{válido} si cubre las aristas \emph{originales} con ambos extremos en $B_t$; las aristas de relleno no imponen restricciones. Si $t$ tiene hijos $c_1,\dots,c_r$, con $I_j=B_{c_j}\setminus\{c_j\}\subseteq B_t$,
+\begin{equation}\label{eq:dp}
+T_t[S]=\begin{cases}
+\displaystyle |S|+\sum_{j=1}^{r}\Big(\underbrace{\min\big\{T_{c_j}[S\cap I_j],\;T_{c_j}[(S\cap I_j)\cup\{c_j\}]\big\}}_{F_{c_j}[S\cap I_j]\text{ (tabla olvidada)}}-|S\cap I_j|\Big) & \text{si $S$ es válido,}\\[4pt]
++\infty & \text{si no.}
+\end{cases}
+\end{equation}
+Se resta $|S\cap I_j|$ porque esos vértices ya se contaron en $|S|$. Las tablas de hijos distintos se pueden sumar porque sus subárboles solo comparten vértices de $B_t$, que es la propiedad separadora. El óptimo es la suma, sobre las raíces (una por componente), de $\min_S T_r[S]$.
+
+\begin{algorithm}[!htbp]
+\caption{\alg{PD-TD}$(G, W)$: programación dinámica sobre la descomposición por grado mínimo}\label{alg:dp}
+\Input{grafo $G$; ancho máximo permitido $W$}
+\Output{una cubierta mínima, o \textsc{demasiado ancho}}
+calcular el orden de eliminación $v_1,\dots,v_n$ y las bolsas; \lIf{ancho $>W$}{\Return \textsc{demasiado ancho}}
+\For(\Comment*[f]{los hijos se procesan antes que el padre}){$i=1,\dots,n$}{
+  $t\gets v_i$;\quad $b\gets|B_t|$ ($t$ ocupa el bit más alto)\;
+  \ForEach{$S\in\{0,1\}^{b}$}{
+    \lIf{$S$ no cubre las aristas originales de $B_t$}{$T[S]\gets\infty$}
+    \lElse{$T[S]\gets|S|+\sum_{c\in\mathrm{hijos}(t)}\big(F_c[S\cap I_c]-|S\cap I_c|\big)$}
+  }
+  $F_t[S']\gets\min\{T[S'],T[S'\cup\{t\}]\}$ para $S'\subseteq B_t\setminus\{t\}$; recordar cuál de los dos ganó\;
+}
+reconstruir de la raíz hacia las hojas, eligiendo para cada $t$ el bit recordado\;
+\end{algorithm}
+
+\begin{theorem}[Complejidad]\label{thm:dp}
+Si la descomposición tiene ancho $w$, \alg{PD-TD} corre en tiempo
+\[O\Big(\sum_t 2^{|B_t|}\,|B_t|\,(1+r_t)\Big)=O(2^{w}\,w\,n),\]
+donde $r_t$ es el número de hijos de $t$, y usa memoria $O(2^{w}\,n)$. La heurística de eliminación cuesta $O(n\,w^2)$ operaciones de conjunto adicionales.
+\end{theorem}
+\begin{proof}
+El nodo $t$ recorre sus $2^{|B_t|}$ subconjuntos. La validez de cada uno se comprueba en $O(|B_t|)$ con máscaras de bits de vecindad, y cada hijo aporta una proyección de $O(|B_t|)$ bits. Como $\sum_t r_t=n-1$ (cada nodo tiene un padre salvo las raíces) y $|B_t|\le w+1$, el total es $O(2^{w+1}(w+1)\cdot 2n)=O(2^w\,w\,n)$. Basta guardar las tablas olvidadas $F_t$, de $2^{|B_t|-1}$ entradas cada una, y la tabla de un hijo se libera en cuanto el padre la consume. Eliminar $v$ cuesta $O(|N(v)|^2)\le O(w^2)$ inserciones de relleno.
+\end{proof}
+En nuestra implementación, \cref{thm:dp} sirve también como \emph{presupuesto}: antes de ejecutar la PD calculamos $\kappa(G)=\sum_t 2^{|B_t|}$, el número exacto de celdas de tabla, y solo la ejecutamos si $\kappa$ cabe en un tope fijado de antemano.
+
+\subsection{Tipos de grafos}
+La programación dinámica es exacta en \emph{cualquier} grafo; lo que cambia es el costo. Es polinomial (lineal en $n$) cuando el ancho está acotado: bosques ($w=1$), grafos serie-paralelo y externo-planares ($w\le 2$), $k$-árboles parciales ($w\le k$) y grafos ``banda'' cuyas aristas unen vértices cercanos en un orden lineal. Es subexponencial, $2^{O(\sqrt n)}$, en grafos planares, el caso estudiado por Alber et al.~\citep{alber2005}. Es inviable en grafos aleatorios con grado medio mayor que 1, en expansores y en grafos densos, cuyo ancho crece linealmente con $n$. Hay además un factor práctico: la calidad de la heurística. En las 200 instancias del PACE~2017, cuyo ancho exacto se conoce, la eliminación por grado mínimo da un ancho mediano \input{tables/pace2017_width_gap.tex} (\cref{sec:resultados}).

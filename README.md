@@ -1,37 +1,49 @@
-# HyVC — Vertex Cover híbrido (proyecto Topics on Advanced Algorithms, UNAL)
+# Vertex Cover: voraz, programación dinámica, aleatorizado y el híbrido HyVC (C++)
 
-Samuel Felipe Palacios Olaya · Juan Diego Díaz Ávila
+Proyecto de *Topics on Advanced Algorithms* (UNAL) — Samuel Felipe Palacios Olaya y Juan Diego Díaz Ávila.
 
-Implementaciones en Python de cuatro paradigmas para *Minimum Vertex Cover*, tomadas de
-artículos publicados, y de **HyVC**, un híbrido construido comparando sus secciones.
-
-| Archivo | Algoritmo | Fuente |
+| Archivo | Algoritmo | Artículo |
 |---|---|---|
-| `vc/greedy.py` | `max_degree_greedy`, `edge_greedy_fastvc`, `matching_2approx` | Cai (IJCAI 2015); Cai, Lin & Luo (JAIR 2017); Weigt & Hartmann (PRE 2001) |
-| `vc/dp_treedec.py` | `dp_vertex_cover` — PD sobre descomposición en árbol, O*(2^tw) | Bannach & Berndt (ESA 2018 / Algorithms 2019); Alber, Dorn & Niedermeier (DAM 2005) |
-| `vc/divide_conquer.py` | `divide_and_conquer` — ramificación + componentes conexas | Weigt & Hartmann (PRE 2001) |
-| `vc/randomized.py` | `randomized_greedy` (deg^γ, Monte Carlo), `random_order_mis` | Gao, Friedrich, Neumann & Hercher (GECCO 2018); Veldt (arXiv 2022) |
-| `vc/reductions.py` | Reglas R0–R4 (grado 0/1/2, folding, dominancia) | Ásgeirsson & Stein (SIDMA 2009); Akiba & Iwata (TCS 2016) |
-| `vc/hybrid.py` | **HyVC** | este trabajo |
-| `vc/exact_ref.py` | CP-SAT (referencia) y fuerza bruta (tests) | OR-Tools |
+| `src/greedy_wh.hpp` | Voraz de grado máximo, O(n+m) | Weigt & Hartmann, PRL 84 (2000); PRE 63 (2001) |
+| `src/dp_td.hpp` | Programación dinámica sobre descomposición en árbol, O(2^w w n) | Bannach & Berndt, Algorithms 12(8) (2019); Alber, Dorn & Niedermeier, DAM 145 (2005) |
+| `src/random_mis.hpp` | MIS en orden aleatorio, 2-aprox. en esperanza, O(n+m) | Veldt, SOSA 2024 |
+| `src/divide_conquer.hpp` | Divide y vencerás exacto (punto de comparación exponencial) | Weigt & Hartmann, PRE 63 (2001) |
+| `src/reductions.hpp`, `src/bounds.hpp`, `src/hybrid.hpp` | **HyVC**: reducciones + componentes + PD + cotas + ramificación | este trabajo |
 
-## Uso
+## Compilar y probar
 
 ```bash
-pip install numpy matplotlib ortools        # ortools solo para la referencia y los tests
-python tests/test_correctness.py            # vs. fuerza bruta (180 grafos)
-python tests/test_vs_cpsat.py               # exactos vs. CP-SAT (33 grafos)
-python bench/run_experiments.py --out results/main.csv           # benchmark principal (~45 min)
-python bench/run_experiments.py --ablation --out results/ablation.csv
-python bench/run_experiments.py --gamma --out results/gamma.csv
-python bench/make_figures.py                # tablas y figuras -> paper/tables, paper/figs
+make                 # bin/vcsolve, bin/gen, bin/test_bruteforce
+make test            # 2000 grafos aleatorios contra fuerza bruta
+```
+
+## Ejecutar
+
+```bash
+./bin/vcsolve hybrid data/pace2019/.../vc-exact_001.gr --time 10
+./bin/vcsolve greedy  grafo.gr
+./bin/vcsolve rmis    grafo.gr --runs 64 --seed 1
+./bin/vcsolve dp      grafo.gr --width 22
+./bin/vcsolve dc      grafo.gr --time 10
+```
+Salida (CSV): `alg,archivo,n,m,tamaño,tiempo_s,estado,extra`, con estado `ok` (óptimo si el algoritmo es exacto), `heur`, `anytime`, `timeout` o `toowide`.
+Formatos aceptados: PACE (`p td n m`), DIMACS (`p edge n m` / `e u v`) y lista de aristas.
+
+## Datos (públicos)
+
+- PACE 2019 Vertex Cover (200 instancias): https://zenodo.org/records/3368306 — descomprimir en `data/pace2019/`.
+- PACE 2017 treewidth exact (200 instancias, CC0): https://github.com/PACE-challenge/Treewidth-PACE-2017-instances — `.gr` en `data/pace2017/`.
+- Sintéticas: `bash bench/make_synthetic.sh`.
+
+## Reproducir los experimentos
+
+```bash
+bash bench/run_all.sh                       # todos los algoritmos, 10 s por instancia
+python3 bench/cpsat_ref.py results/<ds>_need_ref.txt results/<ds>_cpsat.csv 60 2   # óptimos faltantes
+python3 bench/make_tables.py                # tablas y figuras -> paper/
 cd paper && latexmk -pdf main.tex
 ```
 
-```python
-from vc import hybrid_vc
-from vc.graph import erdos_renyi
-g = erdos_renyi(200, 4.0, seed=1)      # dict[int, set[int]]
-cover, info = hybrid_vc(g, time_limit=10)
-print(len(cover), info["exact"])       # exact=True => óptimo certificado
-```
+## Versión anterior
+
+La primera versión del proyecto (Python, con greedy/PD/divide y vencerás/aleatorizado de Gao et al.) está en `python_v1/`.
